@@ -1,2 +1,2 @@
 # BD-PROJETO
-Projeto de Base de Dados 2015/2016
+Final project for the Database Management Systems class of 2015/2016
