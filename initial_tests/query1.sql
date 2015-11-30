@@ -1,4 +1,4 @@
-# 1 - What users failed the login more times than they succeded? (we want all users)
+# What users failed the login more times than they succeded? (we want all users)
 SELECT 	U.userid, U.nome, U.email
 FROM	(	# get the number of failed logins for each user
 			SELECT 		L.userid, COUNT(*) AS n_fails
@@ -18,7 +18,7 @@ FROM	(	# get the number of failed logins for each user
 
 WHERE 	2 * fails.n_fails > totals.n_logins;
 
-# 1 - também para a pergunta 1 - mas não funciona, não sei porquê
+/* também para a pergunta 1 - mas não funciona, não sei porquê
 SELECT 	U.userid, U.nome, U.email
 FROM 	utilizador U
 WHERE 	(2 * (SELECT COUNT(*)
@@ -29,4 +29,9 @@ WHERE 	(2 * (SELECT COUNT(*)
 			 SELECT	COUNT(*)
 			 FROM login L2
 			 WHERE L2.userid = U.userid
-			);
+			);*/
+
+
+
+					
+

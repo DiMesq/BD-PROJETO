@@ -74,4 +74,64 @@ INSERT INTO login (userid, contador_login, sucesso,moment) VALUES
 (51, 258, true, "1992-02-23 00:00:00"),
 (51, 261, false, "2002-02-02 00:00:00");
 
+INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
+(1, 1,"1977-07-01 00:00:00"),
+(1, 2,"1977-07-04 00:00:00"),
+(1, 3,"1977-07-14 00:00:00"),
+(1, 4,"1977-07-23 00:00:00"),
+(5, 5,"1977-07-26 00:00:00"),
+(5, 6,"1977-08-01 00:00:00"),
+(5, 7,"1977-08-10 00:00:00"),
+(5, 8,"1977-08-16 00:00:00"),
+(1, 9,"1977-08-21 00:00:00"),
+(1, 10,"1977-08-27 00:00:00"),
+(1, 11,"1977-09-01 00:00:00"),
+(1, 12,"1977-09-05 00:00:00"),
+(1, 13,"1977-09-15 00:00:00"),
+(5, 14,"1977-09-21 00:00:00"),
+(5, 15,"1977-09-23 00:00:00"),
+(5, 16,"1977-09-24 00:00:00"),
+(5, 17,"1977-10-02 00:00:00"),
+(5, 18,"1977-10-02 00:00:00");
+
+INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
+(1, 1, "U1T1", NULL, true),
+(1, 2, "U1T2", NULL, true),
+(5, 1, "U2T1", NULL, true);
+
+INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
+(1, 1, 1, "U1T1R1", NULL, false),			
+(1, 1, 2, "U1T1R2", NULL, true),			
+(1, 2, 1, "U1T1R1", NULL, true),			
+(5, 1, 1, "U2T1R1", NULL, true),			
+(5, 1, 2, "U2T1R2", NULL, true);			
+
+INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa) VALUES
+(1, 1, "U1P1", 1, true),
+(1, 2, "U1P2", 2, true),
+(1, 3, "U1P3", 3, true),
+(1, 4, "U1P4", 4, false),
+(5, 1, "U2P1", 5, true),
+(5, 2, "U2P2", 6, true),
+(5, 3, "U2P3", 7, true),
+(5, 4, "U2P4", 8, true);
+
+INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALUES 
+(1, 1, 1, 1, 1, 9, true),
+(2, 1, 1, 2, 1, 10, true),
+(3, 1, 1, 3, 1, 11, true),
+(4, 1, 2, 4, 1, 12, true),
+(5, 1, 1, 4, 2, 13, true),
+(6, 5, 1, 1, 1, 14, true),
+(7, 5, 1, 2, 1, 15, true),
+(8, 5, 1, 3, 1, 16, true),
+(9, 5, 1, 4, 2, 17, true),
+(10, 5, 1, 4, 1, 18, false);
+
+
+
+
+
+
+
 
