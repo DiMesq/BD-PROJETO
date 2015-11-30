@@ -92,7 +92,8 @@ INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
 (5, 15,"1977-09-23 00:00:00"),
 (5, 16,"1977-09-24 00:00:00"),
 (5, 17,"1977-10-02 00:00:00"),
-(5, 18,"1977-10-02 00:00:00");
+(5, 18,"1977-10-02 00:00:00"),
+(5, 19,"1978-11-03 00:00:00");
 
 INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
 (1, 1, "U1T1", NULL, true),
@@ -126,7 +127,8 @@ INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALU
 (7, 5, 1, 2, 1, 15, true),
 (8, 5, 1, 3, 1, 16, true),
 (9, 5, 1, 4, 2, 17, true),
-(10, 5, 1, 4, 1, 18, false);
+(10, 5, 1, 4, 1, 18, false),
+(11, 5, 1, 4, 2, 19, false);
 
 
 
