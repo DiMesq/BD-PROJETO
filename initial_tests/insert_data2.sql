@@ -93,19 +93,32 @@ INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
 (5, 16,"1977-09-24 00:00:00"),
 (5, 17,"1977-10-02 00:00:00"),
 (5, 18,"1977-10-02 00:00:00"),
-(5, 19,"1978-11-03 00:00:00");
+(5, 19,"1978-11-03 00:00:00"),
+(1, 20,"1979-09-05 00:00:00"),
+(1, 21,"1979-09-15 00:00:00"),
+(1, 22,"1979-09-21 00:00:00"),
+(13, 23,"1979-09-23 00:00:00"),
+(13, 24,"1979-09-24 00:00:00"),
+(13, 25,"1979-10-02 00:00:00"),
+(13, 26,"1979-10-02 00:00:00"),
+(13, 27,"1979-11-03 00:00:00");
 
 INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
 (1, 1, "U1T1", NULL, true),
 (1, 2, "U1T2", NULL, true),
-(5, 1, "U2T1", NULL, true);
+(5, 1, "U2T1", NULL, true),
+(13, 1, "U3T1", NULL, true),
+(13, 2, "U3T2", NULL, false);
 
 INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
 (1, 1, 1, "U1T1R1", NULL, false),			
 (1, 1, 2, "U1T1R2", NULL, true),			
 (1, 2, 1, "U1T1R1", NULL, true),			
 (5, 1, 1, "U2T1R1", NULL, true),			
-(5, 1, 2, "U2T1R2", NULL, true);			
+(5, 1, 2, "U2T1R2", NULL, true),
+(13, 1, 1, "U3T1R1", NULL, true),
+(13, 1, 2, "U3T1R2", NULL, false),
+(13, 2, 1, "U3T2R1", NULL, false);		
 
 INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa) VALUES
 (1, 1, "U1P1", 1, true),
@@ -115,20 +128,33 @@ INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa) VALUES
 (5, 1, "U2P1", 5, true),
 (5, 2, "U2P2", 6, true),
 (5, 3, "U2P3", 7, true),
-(5, 4, "U2P4", 8, true);
+(5, 4, "U2P4", 8, true),
+(13, 1, "U3P1", 9, true),
+(13, 2, "U3P2", 10, false),
+(13, 3, "U3P3", 11, true);
+
 
 INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALUES 
 (1, 1, 1, 1, 1, 9, true),
-(2, 1, 1, 2, 1, 10, true),
+(2, 1, 1, 2, 1, 10, true),					
 (3, 1, 1, 3, 1, 11, true),
 (4, 1, 2, 4, 1, 12, true),
-(5, 1, 1, 4, 2, 13, true),
+(5, 1, 1, 4, 2, 13, true),					#U1 deve dar false no query 4, porque na quarta pagina falta tipo 2
 (6, 5, 1, 1, 1, 14, true),
 (7, 5, 1, 2, 1, 15, true),
 (8, 5, 1, 3, 1, 16, true),
 (9, 5, 1, 4, 2, 17, true),
 (10, 5, 1, 4, 1, 18, false),
-(11, 5, 1, 4, 2, 19, false);
+(11, 5, 1, 3, 2, 19, false),				#U2 deve dar true no query 4
+(12, 1, 2, 1, 1, 20, false),
+(13, 1, 2, 2, 1, 21, false),
+(14, 1, 2, 3, 1, 22, false),
+(15, 13, 1, 1, 1, 23, true),
+(16, 13, 1, 2, 2, 24, true),
+(17, 13, 2, 1, 1, 25, false),		
+(18, 13, 2, 2, 1, 26, true),
+(19, 13, 2, 3, 1, 27, true);				#U3 deve dar false no query 4
+
 
 
 
