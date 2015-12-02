@@ -1,7 +1,7 @@
 # What are the notes (registo table) that appear in all pages (page table) of a certain user?
-SELECT 	R.nome
-FROM registo R
-WHERE NOT EXISTS(   SELECT 	P.pagecounter
+SELECT 	R.userid, R.typid, R.nome
+FROM 	registo R
+WHERE 	NOT EXISTS(	SELECT 	P.pagecounter
 					FROM	pagina P
 					WHERE 	P.userid = R.userid
 							AND P.pagecounter 	NOT IN (SELECT 	RP.pageid
@@ -12,9 +12,9 @@ WHERE NOT EXISTS(   SELECT 	P.pagecounter
 );
 
 # outra forma para o 2 (acho que esta é melhor)
-SELECT 	R.nome
-FROM registo R
-WHERE NOT EXISTS(   SELECT 	P.pagecounter
+SELECT 	R.userid, R.typeid, R.nome
+FROM 	registo R
+WHERE 	NOT EXISTS(	SELECT 	P.pagecounter
 					FROM	pagina P
 					WHERE 	P.userid = R.userid
 							AND NOT EXISTS(		SELECT 	RP.pageid
