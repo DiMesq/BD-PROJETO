@@ -101,17 +101,22 @@ INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
 (13, 24,"1979-09-24 00:00:00"),
 (13, 25,"1979-10-02 00:00:00"),
 (13, 26,"1979-10-02 00:00:00"),
-(13, 27,"1979-11-03 00:00:00");
+(13, 27,"1979-11-03 00:00:00"),
+(1, 28,"1979-11-04 00:00:00"),
+(13, 29,"1979-11-05 00:00:00"),
+(1, 30,"1979-12-04 00:00:00"),
+(1, 31,"1979-12-06 00:00:00"),
+(13, 32,"1979-12-07 00:00:00");
 
 INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
 (1, 1, "U1T1", NULL, true),
 (1, 2, "U1T2", NULL, true),
 (5, 1, "U2T1", NULL, true),
 (13, 1, "U3T1", NULL, true),
-(13, 2, "U3T2", NULL, false);
+(13, 2, "U3T2", 29, false);
 
 INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
-(1, 1, 1, "U1T1R1", NULL, false),			
+(1, 1, 1, "U1T1R1", 28, false),			
 (1, 1, 2, "U1T1R2", NULL, true),			
 (1, 2, 1, "U1T1R1", NULL, true),			
 (5, 1, 1, "U2T1R1", NULL, true),			
@@ -153,7 +158,13 @@ INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALU
 (16, 13, 1, 2, 2, 24, true),
 (17, 13, 2, 1, 1, 25, false),		
 (18, 13, 2, 2, 1, 26, true),
-(19, 13, 2, 3, 1, 27, true);				
+(19, 13, 2, 3, 1, 27, true);	
+
+INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES
+(1, 1, 1,"U1C1", 30, true);
+
+INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) VALUES
+(1, 1, 1, 1, "meu valor", 31, true);			
 
 
 
