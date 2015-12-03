@@ -139,13 +139,13 @@ INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALU
 (2, 1, 1, 2, 1, 10, true),					
 (3, 1, 1, 3, 1, 11, true),
 (4, 1, 2, 4, 1, 12, true),
-(5, 1, 1, 4, 2, 13, true),					#U1 deve dar false no query 4, porque na quarta pagina falta tipo 2
+(5, 1, 1, 4, 2, 13, true),					
 (6, 5, 1, 1, 1, 14, true),
 (7, 5, 1, 2, 1, 15, true),
 (8, 5, 1, 3, 1, 16, true),
 (9, 5, 1, 4, 2, 17, true),
 (10, 5, 1, 4, 1, 18, false),
-(11, 5, 1, 3, 2, 19, false),				#U2 deve dar true no query 4
+(11, 5, 1, 3, 2, 19, false),				
 (12, 1, 2, 1, 1, 20, false),
 (13, 1, 2, 2, 1, 21, false),
 (14, 1, 2, 3, 1, 22, false),
@@ -153,7 +153,7 @@ INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALU
 (16, 13, 1, 2, 2, 24, true),
 (17, 13, 2, 1, 1, 25, false),		
 (18, 13, 2, 2, 1, 26, true),
-(19, 13, 2, 3, 1, 27, true);				#U3 deve dar false no query 4
+(19, 13, 2, 3, 1, 27, true);				
 
 
 

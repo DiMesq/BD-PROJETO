@@ -1,8 +1,14 @@
-# query: What are the users that, in all and each one of their pages, have all of the types of notes that they have created?
+# query: What are the users that, in all and each one of their pages, have all 
+# of the types of notes that they have created?
 # answer: get me the user which doenst have a page that is not included in the 
 # pages that have all the types of notes that there users have created
+SELECT 	U.userid, U.nome, U.email
 FROM 	utilizador U
-WHERE 	NOT EXISTS (
+WHERE 	EXISTS	(SELECT *
+				 FROM 	pagina P3, tipo_registo T3
+				 WHERE 	P3.userid = U.userid
+				 		AND P3.userid = T3.userid)
+		AND NOT EXISTS (
 
 			SELECT 	P2.pagecounter
 			FROM	pagina P2
