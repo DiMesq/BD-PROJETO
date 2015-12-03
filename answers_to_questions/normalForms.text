@@ -1,6 +1,6 @@
-# Consider the utlizador relationship, where there are two candidate keys the userid and the email
+# Consider the utlizador realtion, where there are two candidate keys the userid and the email
 #
-# a) In what normal form is the utilizador relationship in?
+# a) In what normal form is the utilizador realtion in?
 
 	It's in the Boyce and Codd Normal Form. Firstly because the candidate 
 	keys are "simple keys" (formed by a single atribute) and so since it 
@@ -24,11 +24,11 @@
 
 # b) Let's consider that nome, password, questao2, resposta2, questao1, resposta1 -> email
 #
-# 	1. In what normal form is the utilizador relationship now in?
+# 	1. In what normal form is the utilizador realtion now in?
 		
-		It's in the Second Normal Form. The reasons specified above that make this relationship be in the 2NF still hold. However, the new functional dependency introduced violates the Third Normal Form requirements. To explain why, let X -> A represent the dependency introduced. Now, since A isn't a subset of X this is a non-trivial relationship. So the only way that this functional dependency might not invalidate the 3NF is if either X is a superkey or if A is part of a key. Obviously neither are true, because X is not a super key and A is a key. Hence it is in the Second Normal Form. Furthermore, this dependency is sometimes called a transitive dependency. 
+		It's in the Second Normal Form. The reasons specified above that make this realtion be in the 2NF still hold. However, the new functional dependency introduced violates the Third Normal Form requirements. To explain why, let X -> A represent the dependency introduced. Now, since A isn't a subset of X this is a non-trivial realtion. So the only way that this functional dependency might not invalidate the 3NF is if either X is a superkey or if A is part of a key. Obviously neither are true, because X is not a super key and A is a key. Hence it is in the Second Normal Form. Furthermore, this dependency is sometimes called a transitive dependency. 
 
-#	2. 	If it is not in BCNF decompose the utilizador relationship into BCNF. 
+#	2. 	If it is not in BCNF decompose the utilizador realtion into BCNF. 
 
 		R1 (userid, nome, password, questao2, resposta2, questao1, resposta1, pais, categoria);
 	   	R2 (nome, password, questao2, resposta2, questao1, resposta1, email).
