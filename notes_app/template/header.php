@@ -16,6 +16,12 @@
     <!-- Custom styling -->
     <link href="css/mystyles.css" rel="stylesheet">
 
+    <?php if (isset($title)): ?>
+        <title>Notify: <?= htmlspecialchars($title) ?></title>
+    <?php else: ?>
+        <title>Notify</title>
+    <?php endif ?>
+
 </head>
 
 <body>
