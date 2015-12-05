@@ -1,5 +1,5 @@
 # What are the notes (registo table) that appear in all pages (page table) of a certain user?
-SELECT 	R.userid, R.typeid, R.nome
+SELECT 	R.userid, R.typecounter, R.nome
 FROM 	registo R
 WHERE 	NOT EXISTS(	SELECT 	P.pagecounter
 					FROM	pagina P
