@@ -14,14 +14,14 @@ require_once("constants.php");
  */
 function render ($template, $values=[]){
 
-	if (file_exists("../tempate/$template")){
+	if (file_exists("../template/$template")){
 
 		// extract values to local scope
 		extract($values);
 
 		require_once("../template/header.php");
 
-		require_once("../tempate/$template");
+		require_once("../template/$template");
 
 		require_once("../template/footer.php");
 
@@ -86,4 +86,3 @@ function query (/* $sql [...] */){
 
 
 ?>
-
