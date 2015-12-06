@@ -34,11 +34,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Notify</a>
+                <a class="navbar-brand" href="index.php">Notify</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <?php if (!empty(SESSION["id"])): ?>
+                    <?php if (!empty($_SESSION["id"])): ?>
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   Home</a></li>
                         <li><a href="#"><i class="fa fa-folder"></i> Types</a></li>
                             </ul>
@@ -47,8 +47,8 @@
                     <?php endif; ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <?php if (empty(SESSION["id"])): ?>
-                        <li><a href="#"></i> Login</a></li>
+                    <?php if (empty($_SESSION["id"])): ?>
+                        <li class="active"><a href="#"></i> Login</a></li>
                         <li><a href="#"></i><Strong> Register</Strong></a></li>
                     <?php else: ?>
                         <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
