@@ -9,20 +9,20 @@ ini_set("display_errors", true);
 error_reporting(E_ALL);
 
 // requirements
-require("constants.php");
-require("functions.php");
+require_once("constants.php");
+require_once("functions.php");
 
 // enable sessions
 session_start();
 
 // require authentication for all pages except the specified
-if (!in_array($_SERVER["PHP_SELF"], ["/login.php", "/logout.php", "/register.php", "/home.php"])){
+if (!in_array($_SERVER["PHP_SELF"], ["/login.php", "/logout.php", "/register.php", "/landingpage.php"])){
 
-	if (isempty($_SESSION["id"])){
+	if (empty($_SESSION["id"])){
+
 		header("Location: landingpage.php");
 		die();
 	}
 }
 
 ?>
-
