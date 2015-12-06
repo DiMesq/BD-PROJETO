@@ -1,4 +1,18 @@
-.row-header{
+html, body {
+    height: 100%;
+}
+
+.round-edge {
+    border-radius: 20px;
+}
+
+.vertical-center {
+    min-height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.row-header {
     margin:0px auto;
     padding:0px auto;
 }
@@ -21,13 +35,9 @@
     margin:0px auto;
     background: #7986CB ;
     color:floralwhite;
+    height: 100%;
 }
 
-address{
-    font-size:80%;
-    margin:0px;
-    color:#0f0f0f;
-}
 
 body{
     padding:50px 0px 0px 0px;
