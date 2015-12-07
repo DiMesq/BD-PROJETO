@@ -83,6 +83,16 @@ function query (/* $sql [...] */){
     
 }
 
+/**
+ * Renders an apology message to the user
+ */
+function apologize($message){
+
+	render("apology.php", ["title" => "Error", "message" => $message]);
+	exit;
+
+}
+
 
 
 ?>
