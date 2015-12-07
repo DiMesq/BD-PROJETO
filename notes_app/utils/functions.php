@@ -44,6 +44,7 @@ function query (/* $sql [...] */){
 
 	// get the sql statement
 	$sql = $args[0];
+
 	// get the values for the prepared statement
 	$params = array_slice($args, 1);
 
@@ -51,7 +52,6 @@ function query (/* $sql [...] */){
     static $db;
     if (!isset($db)) {
 	    try {
-	    
 	        $db = new PDO("mysql:host=" . SERVER . ";dbname=" . DATABASE, USERNAME, PASSWORD);
 	        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	    
@@ -70,7 +70,6 @@ function query (/* $sql [...] */){
         exit;
     }
 	
-	die(implode($params));	    
     // execute the query - if its a SELECT still need to fetch
     $results = $statement->execute($params);
 

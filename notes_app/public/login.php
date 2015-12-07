@@ -13,22 +13,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	}
 	
 	// get the user from the database
-	$query = 	"SELECT email" .
-			 	"FROM 	utilizador" .
-			 	"WHERE 	email = ?";
+	$query = "SELECT userid, password FROM utilizador WHERE email = ?";
 
-	$result = query ($query, $_POST["email"]);
-	die($result);
+	$results = query ($query, $_POST["email"]);
 
 	// if the user doesnt exist throw message
-	if ($user == null){
+	if (count($results) != 1){
 		apologize("Error with the input. Please check your email and password and enter them again.");
 	}
 
-	// login if passwords are the same
-	$pass = $user->get("password");
-	if ($_POST["password"] == $pass){
-		$_SESSION["id"] = $user->getObjectId();
+	// login if passwords are the same (not encrypting passwords)
+	$user = $results[0];
+	
+	if ($_POST["password"] == $user["password"]){
+		$_SESSION["id"] = $user["userid"];
 		header("Location: index.php");
 	}
 	// error message - wrong password
