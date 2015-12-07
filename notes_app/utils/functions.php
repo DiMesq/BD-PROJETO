@@ -5,6 +5,23 @@
 require_once("constants.php");
 
 /**
+ * Log out
+ */
+function logout() {
+
+    // unset any session variables
+    $_SESSION = [];
+
+    // expire cookie
+    if (!empty($_COOKIE[session_name()])) {
+        setcookie(session_name(), "", time() - 42000);
+    }
+
+    // destroy session
+    session_destroy();
+}
+
+/**
  * Renders a template.
  *
  * Input: - template file name;

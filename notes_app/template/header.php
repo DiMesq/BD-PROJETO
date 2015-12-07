@@ -52,7 +52,7 @@
                         <li class="active"><a href="login.php"></i> Login</a></li>
                         <li><a href="#"></i><Strong> Register</Strong></a></li>
                     <?php else: ?>
-                        <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
