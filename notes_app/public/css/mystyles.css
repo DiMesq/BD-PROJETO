@@ -2,6 +2,16 @@ html, body {
     height: 100%;
 }
 
+body {
+    background: #7986CB ;
+    color:floralwhite;
+}
+
+.space-top {
+    position: relative;
+    margin-top: 15%;
+}
+
 .round-edge {
     border-radius: 22px;
 }
@@ -20,8 +30,11 @@ html, body {
 .row-content {
     margin:0px auto;
     padding: 50px 0px 50px 0px;
-    border-bottom: 1px ridge;
     min-height:400px;
+}
+
+.row-border {
+    border-bottom: 1px ridge;
 }
 
 .row-footer{
