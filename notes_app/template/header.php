@@ -15,6 +15,8 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styling -->
     <link href="css/mystyles.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <?php if (isset($title)): ?>
         <title>Notify: <?= htmlspecialchars($title) ?></title>
@@ -39,7 +41,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <?php if (!empty($_SESSION["id"])): ?>
-                        <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   Home</a></li>
+                        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   Home</a></li>
                         <li><a href="#"><i class="fa fa-folder"></i> Types</a></li>
                             </ul>
                         </li>
@@ -48,7 +50,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (empty($_SESSION["id"])): ?>
-                        <li class="active"><a href="#"></i> Login</a></li>
+                        <li class="active"><a href="login.php"></i> Login</a></li>
                         <li><a href="#"></i><Strong> Register</Strong></a></li>
                     <?php else: ?>
                         <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
