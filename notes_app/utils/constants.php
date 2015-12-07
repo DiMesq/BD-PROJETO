@@ -9,7 +9,7 @@
     define("PASSWORD", "qLjv4hmZE");
 
     // database server
-    define("SERVER", "localhost");
+    define("SERVER", "127.0.0.1");
 
     // database username
     define("USERNAME", "root");
