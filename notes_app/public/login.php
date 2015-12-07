@@ -4,7 +4,7 @@ require_once("../utils/config.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
-	render("login_form.php");
+	render("login_form.php", ["title" => "Login"]);
 
 } else if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -12,12 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		apologize("Please enter your email.");
 	}
 	
-	apologize("You're ugly. No note book for you.");
-	
 	// get the user from the database
-	$emailQuery = new ParseQuery("AppUser");
-	$emailQuery->equalTo("Email", $_POST["email"]);
-	$user = $emailQuery->first();
+	$query = 	"SELECT email" .
+			 	"FROM 	utilizador" .
+			 	"WHERE 	email = ?";
+
+	$result = query ($query, $_POST["email"]);
+	die($result);
 
 	// if the user doesnt exist throw message
 	if ($user == null){

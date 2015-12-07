@@ -2,5 +2,14 @@
 	
 	require_once("../utils/config.php");
 
-	render("user.php", ["title" => "Home"]);
+
+	// TODO: query paginas
+
+	// TODO: query tipos
+
+
+
+
+
+	render("user.php", ["title" => "Home", "results" => $paginas_result]);
 ?>

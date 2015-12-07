@@ -69,7 +69,8 @@ function query (/* $sql [...] */){
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
-    
+	
+	die(implode($params));	    
     // execute the query - if its a SELECT still need to fetch
     $results = $statement->execute($params);
 
