@@ -7,7 +7,7 @@ body {
     color:floralwhite;
 }
 
-body .modal-dialog {
+body .small-modal-width {
     width: 175px;
 }
 .font-black{
@@ -72,7 +72,7 @@ body{
 }
 
 .table-striped > tbody > tr:nth-of-type(even) {
-  background-color: #7986CB;
+  background-color: #6666ff;
 }
 .navbar-inverse {
      background: #303F9F;

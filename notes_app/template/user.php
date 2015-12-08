@@ -1,5 +1,5 @@
 <div id="deletePageModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog small-modal-width">
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header font-black">
@@ -38,6 +38,30 @@
     </div>
     </div>
 </div>
+<div id="addPageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header font-black">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add Page</h4>
+        </div>
+        <div class="modal-body">
+        	<form class="form-inline" id="addPage" action="index.php" method="POST">
+        		<div class="form-group">
+        			<div class="col-xs-8">
+						<input type="text" class="form-control" id="pagename" name="pagename" placeholder="Page Name"/>
+					</div>
+					<div class="col-xs-2"></div>
+        		</div>
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-success">Submit</button>
+		        </div>
+		    </form>
+        </div> 
+    </div>
+    </div>
+</div>
 <div class="container">
 	<div class="row row-content" id="pages">
         <div class="col-xs-10 col-sm-7">
@@ -46,8 +70,8 @@
 		        <table class="table table-striped">
 		        	<thead>
 		            <tr>
-		                <th>Nome</th>
-		                <th>&nbsp;</th>
+		                <th>Name</th>
+		                <th><button data-toggle="modal" data-target="#addPageModal" class="btn btn-success center-block">New</button></th>
 		            </tr>
 		            </thead>
 		            <tbody>
@@ -74,8 +98,8 @@
 		        <table class="table table-striped">
 		        	<thead>
 		            <tr>
-		                <th>Nome</th>
-		                <th>&nbsp;</th>
+		                <th>Name</th>
+		                <th><button class="btn btn-success center-block">New</button></th>
 		            </tr>
 		            </thead>
 		            <tbody>
