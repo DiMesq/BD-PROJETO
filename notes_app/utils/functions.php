@@ -88,10 +88,10 @@ function query (/* $sql [...] */){
     }
 	
     // execute the query - if its a SELECT still need to fetch
-    $results = $statement->execute($params);
+    $statement->execute($params);
 
     // if its a SELECT statement get the result
-    if ($results !== false) {
+    if ($statement->columnCount() > 0) {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     // if its an update just return false 
     } else {

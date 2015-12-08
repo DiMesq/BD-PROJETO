@@ -1,6 +1,5 @@
 $(function (){
 
-	console.log("yayya\n");
 	$('#login_input').on('submit', function(e){
 
 		// error message if no email
