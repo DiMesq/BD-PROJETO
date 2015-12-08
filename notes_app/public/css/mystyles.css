@@ -7,6 +7,12 @@ body {
     color:floralwhite;
 }
 
+body .modal-dialog {
+    width: 175px;
+}
+.font-black{
+    color:#2C3539;
+}
 .center-block{
     display: block;
     margin-left: auto; margin-right:auto;
