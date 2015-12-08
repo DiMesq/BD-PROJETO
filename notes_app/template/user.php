@@ -100,8 +100,8 @@
 		            </thead>
 		            <tbody>
 		            <?php foreach ($pages as $page): ?>
-			            <tr>
-			                <td><?=htmlentities($page['nome'], ENT_QUOTES, 'ISO-8859-1')?></td>
+			            <tr class="clickable-row" data-href="page.php?page=<?=$page["pagecounter"]?>">
+			                <td><a href="page.php?page=<?=$page["pagecounter"]?>" class="link-font"><?=htmlentities($page['nome'], ENT_QUOTES, 'ISO-8859-1')?></a></td>
 			                <td><button data-toggle="modal" data-target="#deletePageModal" class="btn btn-danger btn-sm center-block" id=<?=$page['pagecounter']?>>Delete</button></td>
 			            </tr>
 			        <?php endforeach; ?>
