@@ -1,7 +1,10 @@
-SELECT U.userid, U.email, U.password, P.nome
+SELECT U2.userid
+FROM utilizador U2
+WHERE U2.userid NOT IN(
+SELECT U.userid
 FROM utilizador U, pagina P
-WHERE U.userid = P.userid
-	  AND U.userid = (SELECT MIN(U2.userid)
-						FROM utilizador U2, pagina P2
-                        WHERE U2.userid= P2.userid 
-                             AND P2.ativa = true);
+WHERE U.userid = P.userid);
+
+SELECT 	MAX(P.pagecounter)
+FROM 	pagina P
+WHERE 	P.userid = 78

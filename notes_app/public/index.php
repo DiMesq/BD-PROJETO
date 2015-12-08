@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	
 	// add page	
 	} else if (!empty($_POST["pagename"])){
-
 		// gets the max value for the pagecounter
 		$max = query("SELECT 	MAX(pagecounter) as max
 			   			FROM 	pagina
@@ -61,6 +60,29 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			        VALUES (?, $pageid, ?, 1, true)",
 			   $_SESSION["id"],
 			   $_POST["pagename"]
+		);
+
+	//add type
+	} else if (!empty($_POST["typename"])){
+		// gets the max value for the pagecounter
+		$max = query("SELECT 	MAX(typecnt) as max
+			   			FROM 	tipo_registo
+			   		   WHERE 	userid = ?",
+			   		  $_SESSION["id"]
+			   	);
+
+		// new page counter set to max + 1 or 1 if no pages before
+		if ($max == NULL) {
+			$typeid = 1;
+		
+		} else {
+			$typeid = $max[0]["max"] + 1;
+		}
+
+		query("INSERT INTO 	tipo_registo (userid, typecnt, nome, idseq, ativo)
+			        VALUES (?, $typeid, ?, NULL, true)",
+			   $_SESSION["id"],
+			   $_POST["typename"]
 		);
 
 	}
