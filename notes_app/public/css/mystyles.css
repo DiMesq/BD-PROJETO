@@ -57,6 +57,13 @@ body{
     z-index:0;
 }
 
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #303F9F;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: #7986CB;
+}
 .navbar-inverse {
      background: #303F9F;
 }
