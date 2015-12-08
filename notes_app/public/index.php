@@ -2,9 +2,17 @@
 	
 	require_once("../utils/config.php");
 
-	// TODO: query paginas
+	// get the user pages
+	$pages = query("SELECT pagecounter, nome 
+					FROM pagina 
+					WHERE userid = ? and ativa = true", 
+					$_SESSION["id"]);
 
-	// TODO: query tipos
+	// get the user types
+	$types = query("SELECT typecnt, nome 
+					FROM tipo_registo
+					WHERE userid = ? and ativo = true", 
+					$_SESSION["id"]);
 
-	render("user.php", ["title" => "Home"]);//, "results" => $paginas_result]);
+	render("user.php", ["title" => "Home", "pages" => $pages, "types" => $types]);
 ?>
