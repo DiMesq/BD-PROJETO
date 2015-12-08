@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row row-content">
+	<div class="row row-content" id="pages">
         <div class="col-xs-12 col-sm-9">
             <h2>Your Pages</h2>
             <div class="table-responsive">
@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="container">
-	<div class="row row-content">
+	<div class="row row-content" id="types">
         <div class="col-xs-12 col-sm-9">
             <h2>Your Types</h2>
             <div class="table-responsive">
