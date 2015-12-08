@@ -17,6 +17,7 @@ SET foreign_key_checks = 1 ;
 
 INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao2, resposta2, pais, categoria) VALUES 
  (1,"Gustavo.OLHCNU@JCOK.Pi","Gustavo OLHCNU","GIWYFE-ZSOK_YN","ITHHEJ AMWM KN?","YTREGPFFTL HS.","UPTGHL JMQX WL?","PEEWTMASEP VV.","Pitcairn","NG"),
+ (2,"a@a.c", "diogo", "a", "ola", "adeus", "d", "c", "pa", "2"),
  (5,"Leonardo.WANTMM@CNCD.Gu","Leonardo WANTMM","YUXKZW-FXSV_MI","YJVFYN OCTR EH?","FWKLLMYYQY RJ.","FSVXVN LBQS TL?","BRGGTRXCLM MQ.","Guiana","EQ"),
  (13,"Clara.MUFBLR@VDGG.Ho","Clara MUFBLR","LVYPLE-NAAD_EY","QQWZBW RFZA ND?","WPSNEBUVJH IX.","UORUHH FVVM VA?","GHSOOXRZHI LX.","Honduras","NJ"),
  (21,"Bianca.OCCVHC@BTXJ.Ti","Bianca OCCVHC","SQSTDC-ERTW_BT","BDNFHQ JORA YX?","EHZQTQVRYB UF.","CMPDCU REVQ VK?","KSGMZEJZQB DQ.","Timor Leste","MO"),
@@ -517,6 +518,7 @@ INSERT INTO utilizador (userid,email,nome,password, questao1, resposta1, questao
  (5001,"Matheus.CYMEOI@QAPX.Ge","Matheus CYMEOI","NUYISP-VTML_QP","OFSVQF DRGQ OJ?","UUGDGXMTJK BD.","QARJRA CNOQ JS?","FMYHLEFPJB LD.","Geórgia do Sul e Sandwich do Sul","OW");
 
 INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
+(2, 1, "2014-10-18 00:00:00"),
 (1556, 151489,"1977-07-01 00:00:00"),
 (1957, 151490,"1977-07-04 00:00:00"),
 (734, 151491,"1977-07-14 00:00:00"),
@@ -2969,6 +2971,13 @@ INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
 (5001, 1153932,"2014-10-17 00:00:00");
 
 INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa) VALUES
+(2, 1, "U1P1", 1, true),
+(2, 2, "U1P2", 1, true),
+(2, 3, "U1P3", 1, true),
+(2, 4, "U1P4", 1, true),
+(2, 5, "U1P5", 1, true),
+(2, 6, "U1P6", 1, true),
+(2, 7, "U1P7", 1, true),
 (1556, 26949, "Nike Running Portugal - BVU_PS", 151489, true),
 (1957, 88156, "Necessito de um abraço. Não perguntes - QSZ_HQ", 151490, false),
 (734, 18654, "Sport Lisboa e Benfica  - LUD_FF", 151491, false),
@@ -3471,6 +3480,9 @@ INSERT INTO pagina (userid, pagecounter, nome, idseq, ativa) VALUES
 (5001, 95001, "EU AMO VOCÊ  - XSC_ZJ", 1151987, true);
 
 INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
+(2, 1, "U1T1", NULL, true),
+(2, 2, "U1T2", NULL, true),
+(2, 3, "U1T3", NULL, true),
 (101, 13420, "J IST - TOZ", 151988, false),
 (491, 34824, "M Construtores - EHA", 151989, false),
 (236, 74841, "Y IST - CXA", 151990, true),
@@ -3974,6 +3986,15 @@ INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
 
 
 INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
+(2, 1, 1, "U1T1R1", NULL, true),
+(2, 1, 2, "U1T1R2", NULL, true),
+(2, 1, 3, "U1T1R3", NULL, true),
+(2, 1, 4, "U1T1R4", NULL, true),
+(2, 2, 1, "U1T2R1", NULL, true),
+(2, 2, 2, "U1T2R2", NULL, true),
+(2, 2, 3, "U1T2R3", NULL, true),
+(2, 2, 4, "U1T2R4", NULL, true),
+(2, 3, 1, "U1T3R1", NULL, true),
 (1323, 31482, 97849,"Sierra Management Portugal – http://www.linkedin.com/companies/sonae-sierra", 152487, false),
 (2517, 290395, 20002,"Pietro", 152488, false),
 (2608, 4221, 10735,"Felipe", 152489, false),
@@ -4476,6 +4497,15 @@ INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
 (5001, 83631, 28665,"Soares da Costa – http://www.linkedin.com/companies/soares-da-costa", 1152985, true);
 
 INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES
+(2, 1, 1, "T1C1", 1, true),
+(2, 1, 2, "T1C2", 1, true),
+(2, 1, 3, "T1C3", 1, true),
+(2, 1, 4, "T1C4", 1, true),
+(2, 1, 5, "T1C5", 1, true),
+(2, 2, 1, "T2C1", 1, true),
+(2, 2, 2, "T2C2", 1, true),
+(2, 2, 3, "T2C3", 1, true),
+(2, 3, 1, "T3C1", 1, true),
 (1162, 92962, 17452,"Tipo de Via", 152986, false),
 (653, 14060, 99002,"skype", 152987, true),
 (923, 108319, 143844,"email profissional", 152988, true),
@@ -4979,6 +5009,39 @@ INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES
 
 
 INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) VALUES
+(2, 1, 1, 1, "T1R1C1", 1, true),
+(2, 1, 2, 1, "T1R1C2", 1, true),
+(2, 1, 3, 1, "T1R1C3", 1, true),
+(2, 1, 4, 1, "T1R1C4", 1, true),
+(2, 1, 5, 1, "T1R1C5", 1, true),
+(2, 1, 1, 2, "T1R2C1", 1, true),
+(2, 1, 2, 2, "T1R2C2", 1, true),
+(2, 1, 3, 2, "T1R2C3", 1, true),
+(2, 1, 4, 2, "T1R2C4", 1, true),
+(2, 1, 5, 2, "T1R2C5", 1, true),
+(2, 1, 1, 3, "T1R3C1", 1, true),
+(2, 1, 2, 3, "T1R3C2", 1, true),
+(2, 1, 3, 3, "T1R3C3", 1, true),
+(2, 1, 4, 3, "T1R3C4", 1, true),
+(2, 1, 5, 3, "T1R3C5", 1, true),
+(2, 1, 1, 4, "T1R4C1", 1, true),
+(2, 1, 2, 4, "T1R4C2", 1, true),
+(2, 1, 3, 4, "T1R4C3", 1, true),
+(2, 1, 4, 4, "T1R4C4", 1, true),
+(2, 1, 5, 4, "T1R4C5", 1, true),
+(2, 2, 1, 1, "T2R1C1", 1, true),
+(2, 2, 2, 1, "T2R1C2", 1, true),
+(2, 2, 3, 1, "T2R1C3", 1, true),
+(2, 2, 1, 2, "T2R2C1", 1, true),
+(2, 2, 2, 2, "T2R2C2", 1, true),
+(2, 2, 3, 2, "T2R2C3", 1, true),
+(2, 2, 1, 3, "T2R3C1", 1, true),
+(2, 2, 2, 3, "T2R3C2", 1, true),
+(2, 2, 3, 3, "T2R3C3", 1, true),
+(2, 2, 1, 4, "T2R4C1", 1, true),
+(2, 2, 2, 4, "T2R4C2", 1, true),
+(2, 2, 3, 4, "T2R4C3", 1, true),
+(2, 3, 1, 1, "T3R1C1", 1, true),
 (1162, 92962, 17452,90145,"QSYR", 153485, true),
 (653, 14060, 99002,15513,"UDCK", 153486, true),
 (647, 95330, 13514,89247,"ZYNN", 153487, false),
@@ -5232,6 +5295,22 @@ INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) VALUES
 
 
 INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALUES
+(20, 2, 1, 1, 1, 1, true),
+(2, 2, 2, 1, 2, 1, true),
+(3, 2, 3, 1, 1, 1, true),
+(4, 2, 2, 2, 2, 1, true),
+(5, 2, 2, 2, 3, 1, true),
+(6, 2, 1, 3, 2, 1, true),
+(17, 2, 1, 3, 3, 1, true),
+(8, 2, 1, 3, 4, 1, true),
+(9, 2, 2, 3, 4, 1, true),
+(10, 2, 3, 4, 1, 1, true),
+(11, 2, 2, 5, 1, 1, true),
+(12, 2, 1, 5, 1, 1, true),
+(13, 2, 3, 5, 1, 1, true),
+(14, 2, 2, 5, 3, 1, true),
+(19, 2, 2, 5, 4, 1, true),
+(16, 2, 1, 7, 3, 1, true),
 (1,2608, 4221, 84453,10735, 153734, false),
 (7,2145, 36575, 28948,76378, 153735, false),
 (15,2067, 94207, 18245,54108, 153736, true),
