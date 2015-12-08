@@ -11,6 +11,10 @@ body .small-modal-width {
     width: 175px;
 }
 
+.dark-table{
+    color:black;
+}
+
 .font-black {
     color:#2C3539;
 }
