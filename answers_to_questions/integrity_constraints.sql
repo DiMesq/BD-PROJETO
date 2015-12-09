@@ -110,18 +110,42 @@ BEGIN
 	DECLARE	msg VARCHAR(255);
 
 	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V
+				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V, reg_pag RP
 				WHERE	T.idseq = new.idseq 
 						OR P.idseq = new.idseq
 						OR C.idseq = new.idseq 
 						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq)
+						OR V.idseq = new.idseq
+						OR )
 	THEN
 		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in valor: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
 
+# check for duplicates when inserting on valor
+DROP TRIGGER IF EXISTS check_sequencia_reg_pag //
+CREATE TRIGGER check_sequencia_reg_pag
+BEFORE INSERT ON valor
+
+FOR EACH ROW
+
+BEGIN
+	DECLARE	msg VARCHAR(255);
+
+	IF EXISTS  (SELECT	*
+				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V, reg_pag RP
+				WHERE	T.idseq = new.idseq 
+						OR P.idseq = new.idseq
+						OR C.idseq = new.idseq 
+						OR R.idseq = new.idseq 
+						OR V.idseq = new.idseq
+						OR RP.idseq = new.idseq)
+	THEN
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in valor: ', cast(new.idseq as char));
+		SIGNAL SQLSTATE '45000' SET message_text = msg;
+	END IF;
+END; //
 
 DELIMITER ;
 
