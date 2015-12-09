@@ -2,7 +2,7 @@
 SELECT 	U.nome, U.email
 FROM	(	# get the number of failed logins for each user
 			SELECT 		L.userid, COUNT(*) AS n_fails
-			FROM		Login L
+			FROM		login L
 			WHERE		L.sucesso = false
 			GROUP BY	L.userid
 		) as fails 
