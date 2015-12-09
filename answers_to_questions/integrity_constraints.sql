@@ -16,18 +16,56 @@ FOR EACH ROW
 	
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V
-				WHERE	T.idseq = new.idseq	
-						OR P.idseq = new.idseq 
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq)
-	THEN
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
 		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
+
 END; //
 
 # check for duplicates when inserting in pagina
@@ -39,16 +77,53 @@ FOR EACH ROW
 
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V
-				WHERE	T.idseq = new.idseq 
-						OR P.idseq = new.idseq
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq)
-	THEN
-		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in pagina: ', cast(new.idseq as char));
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
@@ -62,16 +137,53 @@ FOR EACH ROW
 
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V
-				WHERE	T.idseq = new.idseq 
-						OR P.idseq = new.idseq
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq)
-	THEN
-		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in campo: ', cast(new.idseq as char));
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
@@ -85,16 +197,53 @@ FOR EACH ROW
 
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V
-				WHERE	T.idseq = new.idseq 
-						OR P.idseq = new.idseq
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq)
-	THEN
-		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in registo: ', cast(new.idseq as char));
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
@@ -108,17 +257,53 @@ FOR EACH ROW
 
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V, reg_pag RP
-				WHERE	T.idseq = new.idseq 
-						OR P.idseq = new.idseq
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq
-						OR )
-	THEN
-		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in valor: ', cast(new.idseq as char));
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
@@ -126,23 +311,59 @@ END; //
 # check for duplicates when inserting on valor
 DROP TRIGGER IF EXISTS check_sequencia_reg_pag //
 CREATE TRIGGER check_sequencia_reg_pag
-BEFORE INSERT ON valor
+BEFORE INSERT ON reg_pag
 
 FOR EACH ROW
 
 BEGIN
 	DECLARE	msg VARCHAR(255);
+	DECLARE flag INT;
+	DECLARE cnt INT;
 
-	IF EXISTS  (SELECT	*
-				FROM 	tipo_registo T, pagina P, campo C, registo R, valor V, reg_pag RP
-				WHERE	T.idseq = new.idseq 
-						OR P.idseq = new.idseq
-						OR C.idseq = new.idseq 
-						OR R.idseq = new.idseq 
-						OR V.idseq = new.idseq
-						OR RP.idseq = new.idseq)
-	THEN
-		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in valor: ', cast(new.idseq as char));
+	SET flag = 1;
+
+	# test if its repeated in the tipo_registo table
+	SELECT COUNT(*) INTO cnt FROM tipo_registo WHERE idseq = new.idseq;
+	IF (flag AND cnt > 0) THEN SET flag = 0;
+	END IF;
+
+	# if its not repeated in a previous table, test for the registo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM registo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+	
+	# if its not repeated in a previous table, test for the pagina table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM pagina WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the campo table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM campo WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the valor table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM valor WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	# if its not repeated in a previous table, test for the reg_pag table
+	IF (flag) THEN 
+		SELECT COUNT(*) INTO cnt FROM reg_pag WHERE idseq = new.idseq;
+		IF (cnt > 0) THEN SET flag = 0;
+		END IF;
+	END IF;
+
+	IF (NOT flag) THEN 
+		SET msg = concat('MyTriggerError: trying to insert an already existing value of idseq in tipo_registo: ', cast(new.idseq as char));
 		SIGNAL SQLSTATE '45000' SET message_text = msg;
 	END IF;
 END; //
