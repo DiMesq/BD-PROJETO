@@ -3,6 +3,7 @@ DROP TRIGGER IF EXISTS check_sequencia_registo;
 DROP TRIGGER IF EXISTS check_sequencia_valor;
 DROP TRIGGER IF EXISTS check_sequencia_tipo_registo;
 DROP TRIGGER IF EXISTS check_sequencia_pagina;
+DROP TRIGGER IF EXISTS check_sequencia_reg_pag;
 DELETE FROM reg_pag WHERE userid > 1;
 DELETE FROM pagina WHERE userid > 1;
 DELETE FROM valor 	WHERE userid > 1;
