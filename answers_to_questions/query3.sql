@@ -23,7 +23,7 @@ FROM 	utilizador U
 												 	WHERE 		ativa = true
 												 	GROUP BY	userid) as page_per_user
 
-						GROUP BY 	reg_per_page.userid) as A2
+						GROUP BY 	reg_per_page.userid) as averages
 
 WHERE averages.reg_average = (	SELECT		MAX(A2.reg_average)
 								FROM   	   (SELECT 		reg_per_page.userid, (SUM(reg_per_page.n_reg) / MAX(page_per_user.n_pag)) as reg_average
@@ -48,6 +48,7 @@ WHERE averages.reg_average = (	SELECT		MAX(A2.reg_average)
 																	 	GROUP BY	userid) as page_per_user
 
 											GROUP BY 	reg_per_page.userid) as A2);
+
 
 						
 
