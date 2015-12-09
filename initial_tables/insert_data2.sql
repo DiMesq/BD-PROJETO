@@ -109,14 +109,14 @@ INSERT INTO sequencia (userid, contador_sequencia,moment) VALUES
 (1, 32,"1979-12-07 00:00:00");
 
 INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo) VALUES
-(1, 1, "U1T1", NULL, true),
+(1, 1, "U1T1", NULL, false),
 (1, 2, "U1T2", NULL, true),
 (5, 1, "U2T1", NULL, true),
 (13, 1, "U3T1", NULL, true),
 (13, 2, "U3T2", 29, false);
 
 INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo) VALUES
-(1, 1, 1, "U1T1R1", 28, false),			
+(1, 1, 1, "U1T1R1", 28, true),			
 (1, 1, 2, "U1T1R2", NULL, true),			
 (1, 2, 1, "U1T2R1", NULL, true),			
 (5, 1, 1, "U2T1R1", NULL, true),			
@@ -143,20 +143,20 @@ INSERT INTO reg_pag (idregpag, userid, typeid, pageid, regid, idseq, ativa) VALU
 (1, 1, 1, 1, 1, 9, true),
 (2, 1, 1, 2, 1, 10, true),					
 (3, 1, 1, 3, 1, 11, true),
-(4, 1, 2, 4, 1, 12, true),
+(4, 1, 2, 4, 1, 12, false),
 (5, 1, 1, 4, 1, 13, false),					
 (6, 5, 1, 1, 2, 14, true),
 (7, 5, 1, 2, 2, 15, true),
 (8, 5, 1, 3, 1, 16, true),
 (9, 5, 1, 4, 2, 17, true),
 (10, 5, 1, 4, 1, 18, false),
-(11, 5, 1, 3, 2, 19, false),				
-(12, 1, 2, 1, 1, 20, false),
-(13, 1, 2, 2, 1, 21, false),
-(14, 1, 2, 3, 1, 22, false),
+(11, 5, 1, 3, 2, 19, true),				
+(12, 1, 2, 1, 1, 20, true),
+(13, 1, 2, 2, 1, 21, true),
+(14, 1, 2, 3, 1, 22, true),
 (15, 13, 1, 1, 1, 23, true),
 (16, 13, 1, 2, 2, 24, true),
-(17, 13, 2, 1, 1, 25, false),		
+(17, 13, 2, 1, 1, 25, true),		
 (18, 13, 2, 2, 1, 26, true),
 (19, 13, 2, 3, 1, 27, true),
 (20, 1, 1, 1, 2, 32, false);	
