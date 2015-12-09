@@ -13,6 +13,7 @@ WHERE 	EXISTS	(SELECT *
 			SELECT 	P2.pagecounter
 			FROM	pagina P2
 			WHERE	P2.userid = U.userid
+					AND P2.ativa = true
 					AND P2.pagecounter NOT IN (
 
 						SELECT 	P.pagecounter
@@ -23,11 +24,17 @@ WHERE 	EXISTS	(SELECT *
 									SELECT	T.typecnt
 									FROM	tipo_registo T
 									WHERE 	T.userid = P.userid
+											AND T.ativo = true
 											AND NOT EXISTS ( 
 
 												SELECT 	RP2.typeid
-												FROM 	reg_pag RP2
-												WHERE	RP2.userid = T.userid
+												FROM 	reg_pag RP2, registo R
+												WHERE	RP2.userid = R.userid
+														AND RP2.typeid = R.typecounter
+														AND RP2.regid = R.regcounter
+														AND R.ativo = true
+														AND RP2.ativa = true
+														AND RP2.userid = T.userid
 														AND RP2.pageid = P.pagecounter
 														AND RP2.typeid = T.typecnt
 											)
