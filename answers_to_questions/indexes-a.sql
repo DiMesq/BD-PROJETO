@@ -24,8 +24,9 @@
 	# na tabela respetiva a cada um dos dois agrupamentos que são feitos sobre este atributo também não 
 	# traria nenhum melhoramento em termos de tempo na otimização desta query.
 	# 
-	# De qualquer forma vamos fazer a experiência de criar o índice mencionado e verificar 
-	# as diferenças de desempenho obtidas:
+	# Segue-se a experiência de criar o índice mencionado e verificar 
+	# as diferenças de desempenho obtidas. Relembramos que pelas razões referidas, entre outras, não é 
+	# expectável obter-se um melhoramento considerável.
 
 SET profiling = 1;
 
