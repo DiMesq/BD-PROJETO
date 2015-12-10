@@ -8,5 +8,6 @@ FROM 	d_tempo
 	   	FROM 	d_utilizador
 	   	WHERE 	pais = "Hong Kong") as utiliz_pt
 WHERE 	pais = "Hong Kong"
-GROUP BY date_year, month_number, categoria WITH ROLLUP;
+GROUP BY categoria, date_year, month_number  WITH ROLLUP
+HAVING categoria is NOT NULL;
 
