@@ -48,23 +48,9 @@ function render ($template, $values=[]){
 }
 
 /**
- * Make queries and modifications to the database.
- * Takes as input the normal SQL query syntax and additional 
- * parameters if needed.	
- *
- * Returns the resulting rows for the SELECT queries and false otherwise.
+ *	Starts the database
  */
-function query (/* $sql [...] */){
-
-	// get the function input
-	$args = func_get_args();
-
-	// get the sql statement
-	$sql = $args[0];
-
-	// get the values for the prepared statement
-	$params = array_slice($args, 1);
-
+function start_database () {
 	// try to connect to database
     static $db;
     if (!isset($db)) {
@@ -79,6 +65,64 @@ function query (/* $sql [...] */){
 		}
 	}
 
+	return $db;
+}
+
+/**
+ * Makes UPDATE, INSERT AND DELETE updates to the database.
+ * Takes as input the normal SQL syntax and additional 
+ * parameters if needed.	
+ *
+ * Has no return value, only executes the statement.
+ */
+function update (/* $sql [...] */){
+
+	// get the function input
+	$args = func_get_args();
+
+	// get the sql statement
+	$sql = $args[0];
+
+	// get the values for the prepared statement
+	$params = array_slice($args, 1);
+
+	// start the database
+	$db = start_database();
+
+	// prepare the sql update statement
+    $statement = $db->prepare($sql);
+    if ($statement === false) {
+        // trigger error
+        trigger_error($handle->errorInfo()[2], E_USER_ERROR);
+        exit;
+    }
+	
+    // execute the update
+    $statement->execute($params);
+    
+}
+
+/**
+ * Makes SELECT queries.
+ * Takes as input the normal SQL query syntax and additional 
+ * parameters if needed.	
+ *
+ * Returns the resulting rows for the SELECT queries.
+ */
+function query (/* $sql [...] */){
+
+	// get the function input
+	$args = func_get_args();
+
+	// get the sql statement
+	$sql = $args[0];
+
+	// get the values for the prepared statement
+	$params = array_slice($args, 1);
+
+	// start de database
+	$db = start_database();
+
 	// prepare the sql statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
@@ -90,13 +134,7 @@ function query (/* $sql [...] */){
     // execute the query - if its a SELECT still need to fetch
     $statement->execute($params);
 
-    // if its a SELECT statement get the result
-    if ($statement->columnCount() > 0) {
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    // if its an update just return false 
-    } else {
-        return false;
-    }
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
     
 }
 
