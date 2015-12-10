@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			// put the notes values info on the array
 			$notes[$key]["fields"] = $fields;
 		}
-		render("page_template.php", ["title" => "Page", "notes" => $notes]);
+		render("page_template.php", ["title" => "Page", "notes" => $notes, "showmodal" => false]);
 	
 	} else {
 		header("Location: index.php");
@@ -56,6 +56,46 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 } else if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
+	if (!empty($_POST["typename"])){
+		// get the fields from the specified type
+		$fields = query("SELECT C.campocnt, C.nome, T.typecnt
+						   FROM campo C, tipo_registo T
+						  WHERE C.userid = ?
+						 		AND C.typecnt = T.typecnt
+						 		AND C.userid = T.userid
+						 		AND C.ativo = true
+						 		AND T.nome = ?",
+						 $_SESSION["id"],
+						 $_POST["typename"]
+					);
+		// check the reason why the result set was empty 
+		if (count($fields) < 1){
+			$type = query("SELECT 	typecnt
+						     FROM 	tipo_registo
+						    WHERE 	userid = ?
+						    		AND nome = ?",
+						    $_SESSION,
+						    $_POST["typename"]
+					);
+
+			// if there is no type with that name apologize
+			if (count($type) < 1){
+				apologize("You have no type with that name. Please enter a valid type.");
+				header("Location: page.php");
+				die();
+
+			// if the type exists, there are no fields for this type, then get the typeid anyway
+			} else {
+				$typeid = $type[0]["typecnt"];
+			}
+		// if everything ok, get the typeid
+		} else {
+			$typeid = $fields[0]["tyepcnt"];
+		}
+
+		render("insert_note_template.php", ["title" => "Insert values", "typeid" => $typeid, "fields" => $fields]);
+
+	}
 }
 
 ?>

@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		update("INSERT INTO sequencia (moment, userid)
 					VALUES (NOW(), ?)",
 				$_SESSION["id"]);
-		
+			
 		$idseq = next_idseq();
 
 		$success = update("INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)
