@@ -16,8 +16,9 @@ INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo) VALUES
 INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) VALUES
 (1, 1, 1, 1, "meu valor", 31, true);*/
 
-SELECT U.userid, U.nome
-FROM utilizador U
-WHERE U.userid NOT IN (SELECT l.userid
-					   FROM 	login l);
+SELECT R.userid
+FROM 	reg_pag R NATURAL JOIN (SELECT RP2.userid, COUNT(*) as c
+								FROM 	reg_pag RP2
+								GROUP BY RP2.userid) as ola
+where R.userid > 2000 and ola.c > 3;
 
