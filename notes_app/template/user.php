@@ -19,7 +19,7 @@
     </div>
 </div>
 <div id="deleteTypeModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog small-modal-width">
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header font-black">
