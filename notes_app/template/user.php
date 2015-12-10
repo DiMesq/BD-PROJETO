@@ -107,6 +107,11 @@
 			        <?php endforeach; ?>
 		            </tbody>
 		        </table>
+                <?php if (count($pages) < 1): ?>
+                    <div class="col-xs-10 col-offset-2">
+                        <h2> No pages! Add one in the green button above!</h2>
+                    </div>
+                <?php endif; ?>
 		    </div>
         </div>
          <div class="col-xs-2 col-sm-5">
@@ -135,6 +140,11 @@
 			        <?php endforeach; ?>
 		            </tbody>
 		        </table>
+                <?php if (count($types) < 1): ?>
+                    <div class="col-xs-10 col-offset-2">
+                        <h2> No types! Add one in the green button above!</h2>
+                    </div>
+                <?php endif; ?>
 		    </div>
         </div>
          <div class="col-xs-2 col-sm-5">
