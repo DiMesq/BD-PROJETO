@@ -56,11 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$pageid = $max[0]["max"] + 1;
 		}
 
-		update("INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)
-			         VALUES 	(?, $pageid, ?, 1, true)",
-			   $_SESSION["id"],
-			   $_POST["pagename"]
+		$success = update("INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)
+			         			VALUES 	(?, $pageid, ?, 1, true)",
+			   			   $_SESSION["id"],
+			               $_POST["pagename"]
 		);
+
+		if (!$success){
+			apologize("Duplicate name for page. Please pick a different name for your page.");
+		}
 
 	//add type
 	} else if (!empty($_POST["typename"])){
@@ -79,11 +83,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$typeid = $max[0]["max"] + 1;
 		}
 
-		update("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo)
-			         VALUES (?, $typeid, ?, NULL, true)",
-			   $_SESSION["id"],
-			   $_POST["typename"]
+		$success = update("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo)
+			         			VALUES (?, $typeid, ?, NULL, true)",
+			   			  $_SESSION["id"],
+			              $_POST["typename"]
 		);
+
+		if (!$success){
+			apologize("Duplicate name for type. Please pick a different name for your type.");
+		}
 
 	}
 

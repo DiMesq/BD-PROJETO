@@ -73,7 +73,9 @@ function start_database () {
  * Takes as input the normal SQL syntax and additional 
  * parameters if needed.	
  *
- * Has no return value, only executes the statement.
+ * Executes the statement, returns true if it was successeful and
+ * false otherwise. Most often returns false when the statement
+ * violates some constraint of the table or database
  */
 function update (/* $sql [...] */){
 
@@ -97,8 +99,14 @@ function update (/* $sql [...] */){
         exit;
     }
 	
-    // execute the update
-    $statement->execute($params);
+	try{
+	    // execute the update
+	    $statement->execute($params);
+	    return true;
+
+	} catch (PDOException $e){
+		return false;
+	}
     
 }
 
