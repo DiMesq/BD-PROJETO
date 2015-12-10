@@ -111,6 +111,11 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php if (count($notes) < 1): ?>
+                    <div class="col-xs-10 col-offset-2">
+                        <h2> No notes! Add one in the green button above!</h2>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
          <div class="col-xs-12 col-sm-3">
