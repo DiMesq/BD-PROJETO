@@ -49,9 +49,13 @@
 		
 
 #	2. 	If it is not in BCNF decompose the utilizador relation into BCNF. 
-
+		
 		R1 (userid, nome, password, questao2, resposta2, questao1, resposta1, pais, categoria);
 
 	   	R2 (nome, password, questao2, resposta2, questao1, resposta1, email).
+
+	   	Aqui userid mantém-se como chave primária para a tabela R1 (como era na tabela utilizador) e agora 
+	   	(nome, password, questao2, resposta2, questao1, resposta1) tem uma restrição de foreign key na tabela
+	   	R2 referenciando a tabela R1.
 
 	   	
