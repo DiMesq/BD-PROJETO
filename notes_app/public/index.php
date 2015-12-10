@@ -56,8 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$pageid = $max[0]["max"] + 1;
 		}
 
+		// insert the new action in sequence
+		update("INSERT INTO sequencia (moment, userid)
+					VALUES (NOW(), ?)",
+				$_SESSION["id"]);
+		
+		$idseq = next_idseq();
+
 		$success = update("INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)
-			         			VALUES 	(?, $pageid, ?, 1, true)",
+			         			VALUES 	(?, $pageid, ?, $idseq, true)",
 			   			   $_SESSION["id"],
 			               $_POST["pagename"]
 		);
@@ -83,8 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$typeid = $max[0]["max"] + 1;
 		}
 
+		// insert the new action in sequence
+		update("INSERT INTO sequencia (moment, userid)
+					VALUES (NOW(), ?)",
+				$_SESSION["id"]);
+
+		$idseq = next_idseq();
+
 		$success = update("INSERT INTO tipo_registo (userid, typecnt, nome, idseq, ativo)
-			         			VALUES (?, $typeid, ?, NULL, true)",
+			         			VALUES (?, $typeid, ?, $idseq, true)",
 			   			  $_SESSION["id"],
 			              $_POST["typename"]
 		);

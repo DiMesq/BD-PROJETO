@@ -102,12 +102,12 @@ function update (/* $sql [...] */){
 	try{
 	    // execute the update
 	    $statement->execute($params);
-	    return true;
 
 	} catch (PDOException $e){
 		return false;
 	}
-    
+
+    return true;
 }
 
 /**
@@ -146,6 +146,18 @@ function query (/* $sql [...] */){
     
 }
 
+/**
+ * Gets the next value of idseq
+ */
+function next_idseq(){
+	// gets the max value in sequencia
+	$max_array = query("SELECT 	MAX(contador_sequencia) as max
+		   			FROM 	sequencia"
+		   	);
+
+	// returns the max
+	return $max_array[0]["max"];
+}
 /**
  * Renders an apology message to the user
  */
