@@ -12,12 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 	if (!empty($_POST["typeid"])){
 
-		// ver se registo já existe 
-
-		// se já existir fazer update nos valores e meter flag ativa a true na reg_pag (ou inserir), 
-		// meter flag a true no registo e no tipo?
-
-		// se não, inserir os valores
 		//achar novo valor do regcounter
 		$max = query(false, "SELECT 	MAX(regcounter) as max
 					   		   FROM 	registo
