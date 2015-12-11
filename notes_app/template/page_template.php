@@ -4,21 +4,27 @@
     <div class="modal-content">
         <div class="modal-header font-black">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add Note</h4>
+            <h4 class="modal-title">Add Note - enter the Note's name and the Fields' values</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body font-black">
             <form class="form-horizontal" id="enterFields" action="page.php" method="POST">
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <input type="text" class="form-control" id="regname" name=<"regname" placeholder="Note Name">
+                    </div>
+                </div>
                 <?php foreach ($fields as $key => $field): ?>
                     <div class="form-group">
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" name=<?=$key?> placeholder="Note Name">
+                        <label for=<?=$key?> class="col-sm-2 control-label"><?=$field["nome"]?></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name=<?=$key?> placeholder="Field Value">
                         </div>
                     </div>
                 <?php endforeach; ?>
                 <input type="hidden" id="typeid" name="typeid" value=<?=$typeid?>>
                 <input type="hidden" id="nfields" name="nfields" value=<?=$key?>>
                 <div class="form-group">
-                    <div class="col-xs-12">
+                    <div class="col-xs-10 col-xs-offset-2">
                         <button type="submit" class="btn btn-success">Submit</button>
                     </div>
                 </div>
