@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	// get the user from the database
 	$query = "SELECT userid, password FROM utilizador WHERE email = ?";
 
-	$results = query ($query, $_POST["email"]);
+	$results = query (false, $query, $_POST["email"]);
 
 	// if the user doesnt exist throw message
 	if (count($results) != 1){

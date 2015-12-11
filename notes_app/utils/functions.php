@@ -86,7 +86,7 @@ function update (/* transaction, $sql, [...] */){
 	// get the function input
 	$args = func_get_args();
 
-	// get if it should start a transaction
+	// get the transaction flag
 	$transaction = $args[0];
 
 	// get the sql statement
@@ -138,11 +138,11 @@ function query (/* $transaction, $sql , [...] */){
 	// get the function input
 	$args = func_get_args();
 
+	// get the transaction flag
+	$transaction = $args[0];
+
 	// get the sql statement
 	$sql = $args[1];
-
-	// get if it should start a transaction
-	$transaction = $args[0];
 
 	// get the values for the prepared statement
 	$params = array_slice($args, 2);
@@ -161,7 +161,6 @@ function query (/* $transaction, $sql , [...] */){
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
-	
     try{
     	// execute the query - if its a SELECT still need to fetch
 	    $statement->execute($params);
@@ -169,7 +168,7 @@ function query (/* $transaction, $sql , [...] */){
 
     } catch (PDOException $e){
     	if($transaction) $db->rollback();
-    	trigger_error($handle->errorInfo()[2], E_USER_ERROR);
+    	apologize("Some error occurred.");
     	exit;
     }
 
@@ -191,8 +190,8 @@ function end_transaction(){
  */
 function next_idseq(){
 	// insert the new action in sequence (-1 if error)
-	$lastInserted = update("INSERT INTO sequencia (moment, userid)
-								 VALUES (NOW(), ?)",
+	$lastInserted = update(false, "INSERT INTO sequencia (moment, userid)
+								 		VALUES (NOW(), ?)",
 						   $_SESSION["id"]);
 	if ($lastInserted == -1) apologize("Some error ocurred. Please try again.");
 
