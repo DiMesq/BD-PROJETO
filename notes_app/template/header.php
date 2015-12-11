@@ -38,13 +38,6 @@
                 <a class="navbar-brand" href="index.php">Notify</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <?php if (!empty($_SESSION["id"])): ?>
-                        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>   Home</a></li>
-                        <li><a href="#pages"><i class="fa fa-clone"></i> Pages</a></li>
-                        <li><a href="#types"><i class="fa fa-folder"></i> Types</a></li>
-                    <?php endif; ?>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (empty($_SESSION["id"])): ?>
                         <li class="active"><a href="login.php"></i> Login</a></li>
