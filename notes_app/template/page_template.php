@@ -24,18 +24,17 @@
     <div class="modal-content">
         <div class="modal-header font-black">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add Page</h4>
+            <h4 class="modal-title">Specify the Type of your new Note</h4>
         </div>
         <div class="modal-body">
-            <form class="form-inline" id="addPage" action="index.php" method="POST">
+            <form class="form-inline" id="addNote" action="page.php" method="POST">
                 <div class="form-group">
-                    <div class="col-xs-8">
-                        <input type="text" class="form-control" id="pagename" name="pagename" placeholder="Page Name"/>
+                    <div class="col-xs-10">
+                        <input type="text" class="form-control" id="typename" name="typename" placeholder="Type Name"/>
                     </div>
-                    <div class="col-xs-2"></div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div> 
@@ -106,7 +105,7 @@
                                     </table>
                                 </div>
                             </td>
-                            <td><button data-toggle="modal" data-target="#deleteNoteModal" class="btn btn-danger btn-sm center-block" id=<?=$note['regcounter']?>>Delete</button></td>
+                            <td><button data-toggle="modal" data-target="#deleteNoteModal" class="btn btn-danger btn-sm center-block" id=<?=$key?>>Delete</button></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -123,3 +122,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/page.js"></script>

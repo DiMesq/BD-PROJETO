@@ -166,6 +166,7 @@ function query (/* $transaction, $sql , [...] */){
 	    $statement->execute($params);
 		$results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+
     } catch (PDOException $e){
     	if($transaction) $db->rollback();
     	apologize("Some error occurred.");

@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 } else if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
+	// add a new note
 	if (!empty($_POST["typename"])){
 		// get the fields from the specified type
 		$fields = query(false,  "SELECT C.campocnt, C.nome, T.typecnt
@@ -74,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 								     FROM 	tipo_registo
 								    WHERE 	userid = ?
 								    		AND nome = ?",
-								    $_SESSION,
+								    $_SESSION["id"],
 								    $_POST["typename"]
 					);
 
