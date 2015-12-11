@@ -7,7 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 		// get all notes in this page (with the type name) and the fields
 		$notes = getPage($_GET["page"]);
-		render("page_template.php", ["title" => "Page", "notes" => $notes, "showmodal" => false, "pageid" => $_GET["page"]]);
+		render("page_template.php", ["title" => "Page", 
+									"notes" => $notes, 
+									"showmodal" => false, 
+									"pageid" => $_GET["page"]]);
 	
 	} else {
 		header("Location: index.php");

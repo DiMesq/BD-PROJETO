@@ -24,15 +24,16 @@
     <div class="modal-content">
         <div class="modal-header font-black">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Specify the Type of your new Note</h4>
+            <h4 class="modal-title">Specify the new Field name</h4>
         </div>
         <div class="modal-body">
-            <form class="form-inline" id="addNote" action="page.php" method="POST">
+            <form class="form-inline" id="addField" action="type.php" method="POST">
                 <div class="form-group">
                     <div class="col-xs-10">
-                        <input type="text" class="form-control" id="typename" name="typename" placeholder="Type Name"/>
+                        <input type="text" class="form-control" id="fieldname" name="fieldname" placeholder="Field Name"/>
                     </div>
                 </div>
+                <input type="hidden" id="typeid" name="typeid" value=<?=$typeid?>>
                 <div class="form-group">
                         <button type="submit" class="btn btn-success">Submit</button>
                 </div>

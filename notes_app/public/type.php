@@ -38,56 +38,42 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 } else if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	// add a new note
-	if (!empty($_POST["typename"])){
-		// get the fields from the specified type
-		$fields = query(false,  'SELECT C.campocnt, C.nome, T.typecnt
-								   FROM campo C, tipo_registo T
-								  WHERE C.userid = ?
-								 		AND C.typecnt = T.typecnt
-								 		AND C.userid = T.userid
-								 		AND C.ativo = true
-								 		AND T.ativo = true
-								 		AND T.nome = ?',
-						 $_SESSION["id"],
-						 $_POST["typename"]
-					);
-		// check the reason why the result set was empty 
-		if (count($fields) < 1){
-			$type = query(false,  "SELECT 	typecnt
-								     FROM 	tipo_registo
-								    WHERE 	userid = ?
-								    		AND ativo = true
-								    		AND nome = ?",
-								    $_SESSION["id"],
-								    $_POST["typename"]
-					);
+ 	// add a new field
+	if (!empty($_POST["fieldname"])){
+		
+		// gets the max value for the campocnt
+		$max = query(false, "SELECT 	MAX(campocnt) as max
+				   			   FROM 	campo
+				   		      WHERE 	userid = ?
+				   		      			AND typecnt = ?",
+			   		  $_SESSION["id"],
+			   		  $_POST["typeid"]
+			   	);
 
-			// if there is no type with that name apologize
-			if (count($type) < 1){
-				apologize("You have no type with that name. Please enter a valid type.");
-				header("Location: page.php");
-				die();
-
-			// if the type exists, there are no fields for this type, then get the typeid anyway
-			} else {
-				$typeid = $type[0]["typecnt"];
-			}
-		// if everything ok, get the typeid
+		// new type counter set to max + 1 or 1 if no fields before
+		if ($max == NULL) {
+			$campoid = 1;
+		
 		} else {
-			$typeid = $fields[0]["typecnt"];
+			$campoid = $max[0]["max"] + 1;
 		}
 
-		$_SESSION["fields"] = $fields;
+		// insert the new action in sequence and get the next value to insert
+		$idseq = next_idseq();
 
-		// get all notes in this page (with the type name) and the fields
-		$notes = getPage($_POST["pageid"]);
-		render("page_template.php", ["title" => "Insert values", 
-											"typeid" => $typeid, 
-											"fields" => $fields, 
-											"showmodal" => true,
-											"notes" => $notes,
-											"pageid" => $_POST["pageid"]]);
+		$lastInserted = update(false, "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo)
+			         						VALUES (?, ?, $campoid, ?, $idseq, true)",
+			   			  $_SESSION["id"],
+			   			  $_POST["typeid"],
+			              $_POST["fieldname"]
+		);
+
+		if ($lastInserted == -1){
+			apologize("Duplicate name for field. Please pick a different name for your field.");
+		}
+
+		header("Location: type.php?type=" . $_POST["typeid"]);
+		exit;
 
 	}
 }

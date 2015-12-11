@@ -73,14 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 	//add type
 	} else if (!empty($_POST["typename"])){
-		// gets the max value for the pagecounter
+		// gets the max value for the typecnt
 		$max = query(false, "SELECT 	MAX(typecnt) as max
 				   			   FROM 	tipo_registo
 				   		      WHERE 	userid = ?",
 			   		  $_SESSION["id"]
 			   	);
 
-		// new page counter set to max + 1 or 1 if no pages before
+		// new type counter set to max + 1 or 1 if no pages before
 		if ($max == NULL) {
 			$typeid = 1;
 		
