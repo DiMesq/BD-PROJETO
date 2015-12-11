@@ -23,26 +23,26 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	// add a new note
 	if (!empty($_POST["typename"])){
 		// get the fields from the specified type
-		$fields = query(false,  'SELECT C.campocnt, C.nome, T.typecnt
-								   FROM campo C, tipo_registo T
-								  WHERE C.userid = ?
-								 		AND C.typecnt = T.typecnt
-								 		AND C.userid = T.userid
-								 		AND C.ativo = true
-								 		AND T.ativo = true
-								 		AND T.nome = ?',
+		$fields = query('SELECT C.campocnt, C.nome, T.typecnt
+						   FROM campo C, tipo_registo T
+						  WHERE C.userid = ?
+						 		AND C.typecnt = T.typecnt
+						 		AND C.userid = T.userid
+						 		AND C.ativo = true
+						 		AND T.ativo = true
+						 		AND T.nome = ?',
 						 $_SESSION["id"],
 						 $_POST["typename"]
 					);
 		// check the reason why the result set was empty 
 		if (count($fields) < 1){
-			$type = query(false,  "SELECT 	typecnt
-								     FROM 	tipo_registo
-								    WHERE 	userid = ?
-								    		AND ativo = true
-								    		AND nome = ?",
-								    $_SESSION["id"],
-								    $_POST["typename"]
+			$type = query("SELECT 	typecnt
+						     FROM 	tipo_registo
+						    WHERE 	userid = ?
+						    		AND ativo = true
+						    		AND nome = ?",
+						    $_SESSION["id"],
+						    $_POST["typename"]
 					);
 
 			// if there is no type with that name apologize

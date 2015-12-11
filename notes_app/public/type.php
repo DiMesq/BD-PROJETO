@@ -7,19 +7,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	if (isset($_GET["type"])){
 
 		// get all fields in this type 
-		$fields = query(false,  "SELECT campocnt, nome
-							      FROM 	campo
-							     WHERE 	userid = ?
-							     		AND ativo  = true
-							     		AND typecnt = ?",
-					     $_SESSION["id"],
-					     $_GET["type"]
+		$fields = query("SELECT campocnt, nome
+					      FROM 	campo
+					     WHERE 	userid = ?
+					     		AND ativo  = true
+					     		AND typecnt = ?",
+			     $_SESSION["id"],
+			     $_GET["type"]
 			    );
 		// get the type name
-		$typename = query(false,  "SELECT 	nome
-								   FROM 	tipo_registo
-								   WHERE 	userid = ?
-								   			AND typecnt = ?",
+		$typename = query("SELECT 	nome
+						   FROM 	tipo_registo
+						   WHERE 	userid = ?
+						   			AND typecnt = ?",
 							$_SESSION["id"],
 							$_GET["type"]);
 		$tname = $typename[0]["nome"];
@@ -42,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	if (!empty($_POST["fieldname"])){
 		
 		// gets the max value for the campocnt
-		$max = query(false, "SELECT 	MAX(campocnt) as max
-				   			   FROM 	campo
-				   		      WHERE 	userid = ?
-				   		      			AND typecnt = ?",
+		$max = query("SELECT 	MAX(campocnt) as max
+				   		FROM 	campo
+				   		WHERE 	userid = ?
+				   		      	AND typecnt = ?",
 			   		  $_SESSION["id"],
 			   		  $_POST["typeid"]
 			   	);
@@ -61,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		// insert the new action in sequence and get the next value to insert
 		$idseq = next_idseq();
 
-		$lastInserted = update(false, "INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo)
-			         						VALUES (?, ?, $campoid, ?, $idseq, true)",
+		$lastInserted = update("INSERT INTO campo (userid, typecnt, campocnt, nome, idseq, ativo)
+			         				VALUES (?, ?, $campoid, ?, $idseq, true)",
 			   			  $_SESSION["id"],
 			   			  $_POST["typeid"],
 			              $_POST["fieldname"]
@@ -76,11 +76,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 	// delete field
 	if (!empty($_POST["fieldIdDelete"])){
-		update(false, "UPDATE 	campo
-					      SET 	ativo = false 
-					    WHERE 	campocnt = ?
-					         	AND userid = ?
-					         	AND typecnt = ?", 
+		update("UPDATE 	campo
+				   SET 	ativo = false 
+			     WHERE 	campocnt = ?
+					    AND userid = ?
+					    AND typecnt = ?", 
 			   $_POST["fieldIdDelete"],
 			   $_SESSION["id"],
 			   $_POST["typeid"]

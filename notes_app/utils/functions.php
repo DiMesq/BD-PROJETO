@@ -71,41 +71,30 @@ function start_database () {
 /**
  * Makes UPDATE, INSERT AND DELETE updates to the database.
  * 
- * Takes as input a parameter indicating if a transaction should be started, 
- * the normal SQL syntax and additional parameters if needed.
- *
- * If transaction flag parameter is true it is the caller's responsability
- * to end the transaction. 	
+ * Takes as input the normal SQL syntax and additional parameters if needed.
  *
  * Executes the statement, returns the primary key for the last row inserted
- * in case of success and -1 in case of failure. Most often returns false 
- * when the statement violates some constraint of the table or database
+ * in case of success and -1 in case of failure. The primary reason for returning
+ * false is that the update violates some constraint of the table or database.
  */
 function update (/* transaction, $sql, [...] */){
 
 	// get the function input
 	$args = func_get_args();
 
-	// get the transaction flag
-	$transaction = $args[0];
-
 	// get the sql statement
-	$sql = $args[1];
+	$sql = $args[0];
 
 	// get the values for the prepared statement
-	$params = array_slice($args, 2);
+	$params = array_slice($args, 1);
 
 	// start the database
 	$db = start_database();
-
-	// begin transaction if requested
-	if ($transaction) $db->begintransaction();
 
 	// prepare the sql update statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
         // trigger error
-        if ($transaction) $db->rollback();
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
@@ -115,7 +104,6 @@ function update (/* transaction, $sql, [...] */){
 	    $statement->execute($params);
 
 	} catch (PDOException $e){
-		if ($transaction) $db->rollback();
 		return -1;
 	}
 
@@ -125,11 +113,7 @@ function update (/* transaction, $sql, [...] */){
 /**
  * Makes SELECT queries.
  *
- * Takes as input a parameter indicating if a transaction should be started, 
- * the normal SQL query syntax and additional parameters if needed.	
- *
- * If transaction flag parameter is true it is the caller's responsability
- * to end the transaction. 
+ * Takes as input the normal SQL query syntax and additional parameters if needed.	
  * 
  * Returns the resulting rows for the SELECT queries.
  */
@@ -138,25 +122,18 @@ function query (/* $transaction, $sql , [...] */){
 	// get the function input
 	$args = func_get_args();
 
-	// get the transaction flag
-	$transaction = $args[0];
-
 	// get the sql statement
-	$sql = $args[1];
+	$sql = $args[0];
 
 	// get the values for the prepared statement
-	$params = array_slice($args, 2);
+	$params = array_slice($args, 1);
 
 	// start de database
 	$db = start_database();
 
-	// begin transaction if requested
-	if ($transaction) $db->begintransaction();
-
 	// prepare the sql statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
-    	if($transaction) $db->rollback();
         // trigger error
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
@@ -168,7 +145,6 @@ function query (/* $transaction, $sql , [...] */){
 
 
     } catch (PDOException $e){
-    	if($transaction) $db->rollback();
     	apologize("Some error occurred.");
     	exit;
     }
@@ -177,22 +153,13 @@ function query (/* $transaction, $sql , [...] */){
 }
 
 /**
- * Ends a transaction
- */
-function end_transaction(){
-	if (isset($db)){
-		$db->commit();
-	}
-}
-
-/**
  * Inserts the new action in sequencia.
  * Returns the new value of idseq inserted
  */
 function next_idseq(){
 	// insert the new action in sequence (-1 if error)
-	$lastInserted = update(false, "INSERT INTO sequencia (moment, userid)
-								 		VALUES (NOW(), ?)",
+	$lastInserted = update("INSERT INTO sequencia (moment, userid)
+								VALUES (NOW(), ?)",
 						   $_SESSION["id"]);
 	if ($lastInserted == -1) apologize("Some error ocurred. Please try again.");
 
@@ -215,38 +182,38 @@ function apologize($message){
  */
 function getPage($page){
 	// get all notes in this page (with the type name)
-	$notes = query(false,  "SELECT 	RP.pageid, R.regcounter, R.nome as rnome, T.typecnt, T.nome as tnome
-						      FROM 	registo R, tipo_registo T, reg_pag RP
-						     WHERE 	R.userid = ?
-						     		AND RP.pageid = ?
-						     		AND RP.regid = R.regcounter
-						     		AND R.userid = T.userid
-						     		AND R.userid = RP.userid
-						     		AND RP.ativa = true
-						     		AND R.ativo  = true
-						     		AND T.ativo  = true
-						     		AND R.typecounter = T.typecnt
-						     		AND RP.typeid = T.typecnt",
+	$notes = query("SELECT 	RP.pageid, R.regcounter, R.nome as rnome, T.typecnt, T.nome as tnome
+				      FROM 	registo R, tipo_registo T, reg_pag RP
+				     WHERE 	R.userid = ?
+				     		AND RP.pageid = ?
+				     		AND RP.regid = R.regcounter
+				     		AND R.userid = T.userid
+				     		AND R.userid = RP.userid
+				     		AND RP.ativa = true
+				     		AND R.ativo  = true
+				     		AND T.ativo  = true
+				     		AND R.typecounter = T.typecnt
+				     		AND RP.typeid = T.typecnt",
 				     $_SESSION["id"],
 				     $page
 		    );
 
 	// for each note in the page get the associated values
 	foreach ($notes as $key => $note) {
-		$fields = query(false,  "SELECT C.campocnt, C.nome as cnome, V.valor
-								   FROM registo R, campo C, valor V
-								  WHERE R.userid = ?
-								 		AND R.regcounter = ?
-								 		AND R.typecounter = ?
-								 		AND R.ativo = true
-								 		AND C.typecnt = R.typecounter
-								 		AND C.userid = R.userid
-								 		AND C.ativo = true
-								 		AND V.userid = R.userid
-								 		AND V.typeid = C.typecnt
-								 		AND V.campoid = C.campocnt
-								 		AND V.regid = R.regcounter
-								 		AND V.ativo = true",
+		$fields = query("SELECT C.campocnt, C.nome as cnome, V.valor
+						   FROM registo R, campo C, valor V
+						  WHERE R.userid = ?
+						 		AND R.regcounter = ?
+						 		AND R.typecounter = ?
+						 		AND R.ativo = true
+						 		AND C.typecnt = R.typecounter
+						 		AND C.userid = R.userid
+						 		AND C.ativo = true
+						 		AND V.userid = R.userid
+						 		AND V.typeid = C.typecnt
+						 		AND V.campoid = C.campocnt
+						 		AND V.regid = R.regcounter
+						 		AND V.ativo = true",
 						 $_SESSION["id"],
 						 $note["regcounter"],
 						 $note["typecnt"]

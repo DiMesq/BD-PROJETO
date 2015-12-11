@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	// get the user from the database
 	$query = "SELECT userid, password FROM utilizador WHERE email = ?";
 
-	$results = query (false, $query, $_POST["email"]);
+	$results = query ($query, $_POST["email"]);
 
 	// if the user doesnt exist throw message
 	if (count($results) != 1){
@@ -29,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		$_SESSION["id"] = $user["userid"];
 
 		// insert the successeful login in the table
-		update(false, "INSERT INTO login (userid, sucesso, moment) 
-					   VALUES (?, true, NOW())",
+		update("INSERT INTO login (userid, sucesso, moment) 
+					VALUES (?, true, NOW())",
 				$_SESSION['id']);
 
 		header("Location: index.php");
@@ -38,8 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	// error message - wrong password
 	else{
 		// insert the unsuccesseful login in the table
-		update(false, "INSERT INTO login (userid, sucesso, moment) 
-					   VALUES (?, false, NOW())",
+		update("INSERT INTO login (userid, sucesso, moment) 
+					VALUES (?, false, NOW())",
 			   $user["userid"]);
 
 		apologize("Error with the input. Please check your email and password and enter them again.");

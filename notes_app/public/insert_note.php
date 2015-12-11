@@ -13,10 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	if (!empty($_POST["typeid"])){
 
 		//achar novo valor do regcounter
-		$max = query(false, "SELECT 	MAX(regcounter) as max
-					   		   FROM 	registo
-					   		  WHERE 	userid = ?
-					   		  			AND typecounter = ?",
+		$max = query("SELECT 	MAX(regcounter) as max
+					   	FROM 	registo
+					   	WHERE 	userid = ?
+					   		  	AND typecounter = ?",
 			   		  $_SESSION["id"],
 			   		  $_POST["typeid"]
 			   	);
@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		$idseq = next_idseq();
 
 		//inserir registo
-		$lastInserted = update(false, "INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo)
-			         					VALUES (?, ?, ?, ?, $idseq, true)",
+		$lastInserted = update("INSERT INTO registo (userid, typecounter, regcounter, nome, idseq, ativo)
+			         				VALUES (?, ?, ?, ?, $idseq, true)",
 			   			  		$_SESSION["id"],
 			              		$_POST["typeid"],
 			              		$regid,
@@ -50,8 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		//idseq para inserir registo na página
 		$idseq = next_idseq();
 
-		update(false, "INSERT INTO reg_pag (userid, typeid, pageid, regid, idseq, ativa) 
-						VALUES (?, ?, ?, $regid, $idseq, true)",
+		update("INSERT INTO reg_pag (userid, typeid, pageid, regid, idseq, ativa) 
+					VALUES (?, ?, ?, $regid, $idseq, true)",
 				$_SESSION['id'],
 				$_POST['typeid'],
 				$_POST['pageid']);
@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$idseq = next_idseq();
 
 			//inserir valor
-			update(false, "INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) 
-							VALUES (?, ?, ?, $regid, ?, $idseq, true)",
+			update("INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) 
+						VALUES (?, ?, ?, $regid, ?, $idseq, true)",
 					$_SESSION['id'],
 					$_POST['typeid'],
 					$field['campocnt'],
