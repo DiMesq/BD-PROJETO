@@ -56,11 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$pageid = $max[0]["max"] + 1;
 		}
 
-		// insert the new action in sequence
-		update(false, "INSERT INTO sequencia (moment, userid)
-							VALUES (NOW(), ?)",
-				$_SESSION["id"]);
-
 		$idseq = next_idseq();
 
 		$lastInserted = update(false, "INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)

@@ -20,14 +20,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 	// add a new note
 	if (!empty($_POST["typename"])){
 		// get the fields from the specified type
-		$fields = query(false,  "SELECT C.campocnt, C.nome, T.typecnt
+		$fields = query(false,  'SELECT C.campocnt, C.nome, T.typecnt
 								   FROM campo C, tipo_registo T
 								  WHERE C.userid = ?
 								 		AND C.typecnt = T.typecnt
 								 		AND C.userid = T.userid
 								 		AND C.ativo = true
 								 		AND T.ativo = true
-								 		AND T.nome = ?",
+								 		AND T.nome = ?',
 						 $_SESSION["id"],
 						 $_POST["typename"]
 					);
@@ -56,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		} else {
 			$typeid = $fields[0]["typecnt"];
 		}
+
+		$_SESSION["fields"] = $fields;
 
 		// get all notes in this page (with the type name) and the fields
 		$notes = getPage($_POST["pageid"]);

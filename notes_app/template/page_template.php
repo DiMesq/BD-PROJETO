@@ -7,10 +7,10 @@
             <h4 class="modal-title">Add Note - enter the Note's name and the Fields' values</h4>
         </div>
         <div class="modal-body font-black">
-            <form class="form-horizontal" id="enterFields" action="page.php" method="POST">
+            <form class="form-horizontal" id="enterFields" action="insert_note.php" method="POST">
                 <div class="form-group">
                     <div class="col-sm-10 col-sm-offset-2">
-                        <input type="text" class="form-control" id="regname" name=<"regname" placeholder="Note Name">
+                        <input type="text" class="form-control" id="regname" name="regname" placeholder="Note Name">
                     </div>
                 </div>
                 <?php foreach ($fields as $key => $field): ?>
@@ -22,7 +22,7 @@
                     </div>
                 <?php endforeach; ?>
                 <input type="hidden" id="typeid" name="typeid" value=<?=$typeid?>>
-                <input type="hidden" id="nfields" name="nfields" value=<?=$key?>>
+                <input type="hidden" id="pageid" name="pageid" value=<?=$pageid?>>
                 <div class="form-group">
                     <div class="col-xs-10 col-xs-offset-2">
                         <button type="submit" class="btn btn-success">Submit</button>
