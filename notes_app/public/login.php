@@ -24,13 +24,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 
 	// login if passwords are the same (not encrypting passwords)
 	$user = $results[0];
-	
+
 	if ($_POST["password"] == $user["password"]){
 		$_SESSION["id"] = $user["userid"];
+
+		// insert the successeful login in the table
+		update(false, "INSERT INTO login (userid, sucesso, moment) 
+					   VALUES (?, true, NOW())",
+				$_SESSION['id']);
+
 		header("Location: index.php");
-	}
+	} 
 	// error message - wrong password
 	else{
+		// insert the unsuccesseful login in the table
+		update(false, "INSERT INTO login (userid, sucesso, moment) 
+					   VALUES (?, false, NOW())",
+			   $user["userid"]);
+
 		apologize("Error with the input. Please check your email and password and enter them again.");
 	}
 	
