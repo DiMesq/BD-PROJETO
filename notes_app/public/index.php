@@ -56,14 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			$pageid = $max[0]["max"] + 1;
 		}
 
+		// gets the next ideseq and inserts the action in the sequencia table
 		$idseq = next_idseq();
 
+		// inserts the new page in the table
 		$lastInserted = update(false, "INSERT INTO 	pagina (userid, pagecounter, nome, idseq, ativa)
 			         						VALUES 	(?, $pageid, ?, $idseq, true)",
 			   			   $_SESSION["id"],
 			               $_POST["pagename"]
 		);
 
+		// apologize if the user gave an already existing name for the page
 		if ($lastInserted == -1){
 			apologize("Duplicate name for page. Please pick a different name for your page.");
 		}
