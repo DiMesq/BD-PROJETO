@@ -62,11 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 		// get all notes in this page (with the type name) and the fields
 		$notes = getPage($_POST["pageid"]);
 		render("page_template.php", ["title" => "Insert values", 
-											"typeid" => $typeid, 
-											"fields" => $fields, 
-											"showmodal" => true,
-											"notes" => $notes,
-											"pageid" => $_POST["pageid"]]);
+									 "typeid" => $typeid, 
+									 "fields" => $fields, 
+									 "showmodal" => true,
+									 "notes" => $notes,
+									 "pageid" => $_POST["pageid"]]);
 
 	}
 }

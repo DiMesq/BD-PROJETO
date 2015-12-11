@@ -40,8 +40,7 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (empty($_SESSION["id"])): ?>
-                        <li class="active"><a href="login.php"></i> Login</a></li>
-                        <li><a href="#"></i><Strong> Register</Strong></a></li>
+                        <li class="active"><a href="login.php"></i><strong> Login</strong></a></li>
                     <?php else: ?>
                         <li><a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
                     <?php endif; ?>
