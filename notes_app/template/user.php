@@ -134,7 +134,7 @@
 		            <tbody>
 		            <?php foreach ($types as $type): ?>
 			            <tr>
-			                <td><?=htmlentities($type['nome'], ENT_QUOTES, 'ISO-8859-1')?></td>
+			                <td><a href="type.php?type=<?=$type["typecnt"]?>" class="link-font"><?=htmlentities($type['nome'], ENT_QUOTES, 'ISO-8859-1')?></td>
 			                <td><button data-toggle="modal" data-target="#deleteTypeModal" class="btn btn-danger btn-sm center-block" id=<?=$type['typecnt']?>>Delete</button></td>
 			            </tr>
 			        <?php endforeach; ?>
