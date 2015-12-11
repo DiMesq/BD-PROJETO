@@ -1,6 +1,10 @@
 $(function() {
 	var triggerId;
 
+	if (showmodal == true){
+		$("#enterFieldsModal").modal('show');
+	}
+
 	// get the button that triggered the modal
 	$('.modal').on('show.bs.modal', function (e) {
     	triggerId = $(e.relatedTarget).attr('id');
@@ -13,11 +17,11 @@ $(function() {
 					   .appendTo("#deleteNote");
 	});
 
-	$("#editField").on("submit", function(e) {
+	$("#addNote").on("submit", function(e) {
 		var input = $("<input>")
                		   .attr("type", "hidden")
-               		   .attr("name", "typeIdDelete").val(triggerId)
-					   .appendTo("#deleteType");
+               		   .attr("name", "pageid").val(pageid)
+					   .appendTo("#addNote");
 	});
 
 });

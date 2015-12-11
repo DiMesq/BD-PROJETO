@@ -15,9 +15,17 @@ require_once("functions.php");
 // enable sessions
 session_start();
 
+
+$aux = $_SERVER["PHP_SELF"];
+$aux = strrev($aux);
+$tamanho = strpos($aux, '/');
+$aux = substr($aux, 0, $tamanho+1);
+
+$resultado = strrev($aux);
+
 // require authentication for all pages except the specified
 
-if (!in_array($_SERVER["PHP_SELF"], ["/login.php", "/logout.php", "/register.php", "/home.php"])){
+if (!in_array($resultado, ["/login.php", "/logout.php", "/register.php", "/home.php"])){
 
 	if (empty($_SESSION["id"])){
 

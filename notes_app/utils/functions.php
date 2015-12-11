@@ -162,7 +162,7 @@ function query (/* $transaction, $sql , [...] */){
         exit;
     }
     try{
-    	// execute the query - if its a SELECT still need to fetch
+	    	// execute the query - if its a SELECT still need to fetch
 	    $statement->execute($params);
 		$results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -209,6 +209,53 @@ function apologize($message){
 
 }
 
+/**
+ * Gets all the content in a page.
+ * This includes all the notes and all the fields in the notes
+ */
+function getPage($page){
+	// get all notes in this page (with the type name)
+	$notes = query(false,  "SELECT 	RP.pageid, R.regcounter, R.nome as rnome, T.typecnt, T.nome as tnome
+						      FROM 	registo R, tipo_registo T, reg_pag RP
+						     WHERE 	R.userid = ?
+						     		AND RP.pageid = ?
+						     		AND RP.regid = R.regcounter
+						     		AND R.userid = T.userid
+						     		AND R.userid = RP.userid
+						     		AND RP.ativa = true
+						     		AND R.ativo  = true
+						     		AND T.ativo  = true
+						     		AND R.typecounter = T.typecnt
+						     		AND RP.typeid = T.typecnt",
+				     $_SESSION["id"],
+				     $page
+		    );
 
+	// for each note in the page get the associated values
+	foreach ($notes as $key => $note) {
+		$fields = query(false,  "SELECT C.campocnt, C.nome as cnome, V.valor
+								   FROM registo R, campo C, valor V
+								  WHERE R.userid = ?
+								 		AND R.regcounter = ?
+								 		AND R.typecounter = ?
+								 		AND R.ativo = true
+								 		AND C.typecnt = R.typecounter
+								 		AND C.userid = R.userid
+								 		AND C.ativo = true
+								 		AND V.userid = R.userid
+								 		AND V.typeid = C.typecnt
+								 		AND V.campoid = C.campocnt
+								 		AND V.regid = R.regcounter
+								 		AND V.ativo = true",
+						 $_SESSION["id"],
+						 $note["regcounter"],
+						 $note["typecnt"]
+						);
+		// put the notes values info on the array
+		$notes[$key]["fields"] = $fields;
+	}
+
+	return $notes;
+}
 
 ?>
