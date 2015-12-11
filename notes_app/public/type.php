@@ -72,10 +72,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			apologize("Duplicate name for field. Please pick a different name for your field.");
 		}
 
-		header("Location: type.php?type=" . $_POST["typeid"]);
-		exit;
-
 	}
+
+	// delete field
+	if (!empty($_POST["fieldIdDelete"])){
+		update(false, "UPDATE 	campo
+					      SET 	ativo = false 
+					    WHERE 	campocnt = ?
+					         	AND userid = ?
+					         	AND typecnt = ?", 
+			   $_POST["fieldIdDelete"],
+			   $_SESSION["id"],
+			   $_POST["typeid"]
+		);
+	}
+
+	header("Location: type.php?type=" . $_POST["typeid"]);
+	exit;
 }
 
 ?>

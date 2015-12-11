@@ -7,12 +7,13 @@
             <h4 class="modal-title">Are you sure?</h4>
         </div>
         <div class="modal-body">
-        	<form class="form-inline" id="deleteNote" action="page.php" method="POST">
+        	<form class="form-inline" id="deleteField" action="type.php" method="POST">
 		        <div class="form-group">
 		          	<div class="col-sm-5 col-sm-offset-2">
 		            	<button type="submit" class="btn btn-danger">YES</button>
 		          	</div>
 		        </div>
+                <input type="hidden" name="typeid" value=<?=$typeid?>>
 		    </form>
         </div> 
     </div>
@@ -58,7 +59,7 @@
                     <?php foreach ($fields as $key => $field): ?>
                         <tr>
                             <td><?=htmlentities($field['nome'], ENT_QUOTES, 'ISO-8859-1')?></td>
-                            <td><button data-toggle="modal" data-target="#deleteFieldModal" class="btn btn-danger btn-sm center-block" id=<?=$key?>>Delete</button></td>
+                            <td><button data-toggle="modal" data-target="#deleteFieldModal" class="btn btn-danger btn-sm center-block" id=<?=$field['campocnt']?>>Delete</button></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
