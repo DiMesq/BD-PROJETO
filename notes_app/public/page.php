@@ -63,7 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 											"typeid" => $typeid, 
 											"fields" => $fields, 
 											"showmodal" => true,
-											"notes" => $notes]);
+											"notes" => $notes,
+											"pageid" => $_POST["pageid"]]);
 
 	}
 }

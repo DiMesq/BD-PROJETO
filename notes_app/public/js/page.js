@@ -17,7 +17,7 @@ $(function() {
 					   .appendTo("#deleteNote");
 	});
 
-	$("#addNote").on("submit", function(e) {
+	$("#addNoteModal").on("submit", function(e) {
 		var input = $("<input>")
                		   .attr("type", "hidden")
                		   .attr("name", "pageid").val(pageid)

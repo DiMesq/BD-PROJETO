@@ -7,7 +7,7 @@
             <h4 class="modal-title">Add Note</h4>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal" id="addNote" action="page.php" method="POST">
+            <form class="form-horizontal" id="enterFields" action="page.php" method="POST">
                 <?php foreach ($fields as $key => $field): ?>
                     <div class="form-group">
                         <div class="col-xs-12">
