@@ -48,9 +48,10 @@ function render ($template, $values=[]){
 }
 
 /**
- *	Starts the database
+ *	Starts the database.
+ *  If transaction is true also begins a transaction.
  */
-function start_database () {
+function start_database ($transaction) {
 	// try to connect to database
     static $db;
     if (!isset($db)) {
@@ -65,36 +66,49 @@ function start_database () {
 		}
 	}
 
+	if ($transaction) $db->begintransaction();
+
 	return $db;
 }
 
 /**
  * Makes UPDATE, INSERT AND DELETE updates to the database.
- * Takes as input the normal SQL syntax and additional 
- * parameters if needed.	
+ * 
+ * Takes as input a parameter indicating if a transaction should be started, 
+ * the normal SQL syntax and additional parameters if needed.
  *
- * Executes the statement, returns true if it was successeful and
- * false otherwise. Most often returns false when the statement
- * violates some constraint of the table or database
+ * If transaction flag parameter is true it is the caller's responsability
+ * to end the transaction. 	
+ *
+ * Executes the statement, returns the primary key for the last row inserted
+ * in case of success and -1 in case of failure. Most often returns false 
+ * when the statement violates some constraint of the table or database
  */
-function update (/* $sql [...] */){
+function update (/* transaction, $sql, [...] */){
 
 	// get the function input
 	$args = func_get_args();
 
+	// get if it should start a transaction
+	$transaction = $args[0];
+
 	// get the sql statement
-	$sql = $args[0];
+	$sql = $args[1];
 
 	// get the values for the prepared statement
-	$params = array_slice($args, 1);
+	$params = array_slice($args, 2);
 
 	// start the database
 	$db = start_database();
+
+	// begin transaction if requested
+	if ($transaction) $db->begintransaction();
 
 	// prepare the sql update statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
         // trigger error
+        if ($transaction) $db->rollup();
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
@@ -104,59 +118,89 @@ function update (/* $sql [...] */){
 	    $statement->execute($params);
 
 	} catch (PDOException $e){
-		return false;
+		if ($transaction) $db->rollup();
+		return -1;
 	}
 
-    return true;
+    return $db->lastInsertId();
 }
 
 /**
  * Makes SELECT queries.
- * Takes as input the normal SQL query syntax and additional 
- * parameters if needed.	
  *
+ * Takes as input a parameter indicating if a transaction should be started, 
+ * the normal SQL query syntax and additional parameters if needed.	
+ *
+ * If transaction flag parameter is true it is the caller's responsability
+ * to end the transaction. 
+ * 
  * Returns the resulting rows for the SELECT queries.
  */
-function query (/* $sql [...] */){
+function query (/* $transaction, $sql , [...] */){
 
 	// get the function input
 	$args = func_get_args();
 
 	// get the sql statement
-	$sql = $args[0];
+	$sql = $args[1];
+
+	// get if it should start a transaction
+	$transaction = $args[0];
 
 	// get the values for the prepared statement
-	$params = array_slice($args, 1);
+	$params = array_slice($args, 2);
 
 	// start de database
 	$db = start_database();
 
+	// begin transaction if requested
+	if ($transaction) $db->begintransaction();
+
 	// prepare the sql statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
+    	if($transaction) $db->rollup();
         // trigger error
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
 	
-    // execute the query - if its a SELECT still need to fetch
-    $statement->execute($params);
+    try{
+    	// execute the query - if its a SELECT still need to fetch
+	    $statement->execute($params);
+		$results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+    } catch (PDOException $e){
+    	if($transaction) $db->rollup();
+    	trigger_error($handle->errorInfo()[2], E_USER_ERROR);
+    	exit;
+    }
+
+    return $results;   
 }
 
 /**
- * Gets the next value of idseq
+ * Ends a transaction
+ */
+function end_transaction(){
+	if (isset($db)){
+		$db->commit();
+	}
+}
+
+/**
+ * Inserts the new action in sequencia.
+ * Returns the new value of idseq inserted
  */
 function next_idseq(){
-	// gets the max value in sequencia
-	$max_array = query("SELECT 	MAX(contador_sequencia) as max
-		   			FROM 	sequencia"
-		   	);
+	// insert the new action in sequence (-1 if error)
+	$lastInserted = update("INSERT INTO sequencia (moment, userid)
+								 VALUES (NOW(), ?)",
+						   $_SESSION["id"]);
+	if ($lastInserted == -1) apologize("Some error ocurred. Please try again.");
 
-	// returns the max
-	return $max_array[0]["max"];
+	// returns the seqid
+	return $lastInserted;
 }
 /**
  * Renders an apology message to the user

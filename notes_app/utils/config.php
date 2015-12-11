@@ -16,13 +16,14 @@ require_once("functions.php");
 session_start();
 
 // require authentication for all pages except the specified
+
 if (!in_array($_SERVER["PHP_SELF"], ["/login.php", "/logout.php", "/register.php", "/home.php"])){
 
 	if (empty($_SESSION["id"])){
 
 		header("Location: home.php");
 		die();
-	}
+	} 
 }
 
 ?>
