@@ -49,9 +49,8 @@ function render ($template, $values=[]){
 
 /**
  *	Starts the database.
- *  If transaction is true also begins a transaction.
  */
-function start_database ($transaction) {
+function start_database () {
 	// try to connect to database
     static $db;
     if (!isset($db)) {
@@ -65,8 +64,6 @@ function start_database ($transaction) {
 	        exit;
 		}
 	}
-
-	if ($transaction) $db->begintransaction();
 
 	return $db;
 }
@@ -108,7 +105,7 @@ function update (/* transaction, $sql, [...] */){
     $statement = $db->prepare($sql);
     if ($statement === false) {
         // trigger error
-        if ($transaction) $db->rollup();
+        if ($transaction) $db->rollback();
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
     }
@@ -118,7 +115,7 @@ function update (/* transaction, $sql, [...] */){
 	    $statement->execute($params);
 
 	} catch (PDOException $e){
-		if ($transaction) $db->rollup();
+		if ($transaction) $db->rollback();
 		return -1;
 	}
 
@@ -159,7 +156,7 @@ function query (/* $transaction, $sql , [...] */){
 	// prepare the sql statement
     $statement = $db->prepare($sql);
     if ($statement === false) {
-    	if($transaction) $db->rollup();
+    	if($transaction) $db->rollback();
         // trigger error
         trigger_error($handle->errorInfo()[2], E_USER_ERROR);
         exit;
@@ -171,7 +168,7 @@ function query (/* $transaction, $sql , [...] */){
 		$results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e){
-    	if($transaction) $db->rollup();
+    	if($transaction) $db->rollback();
     	trigger_error($handle->errorInfo()[2], E_USER_ERROR);
     	exit;
     }
