@@ -15,7 +15,7 @@
                 </div>
                 <?php foreach ($fields as $key => $field): ?>
                     <div class="form-group">
-                        <label for=<?=$key?> class="col-sm-2 control-label"><?=$field["nome"]?></label>
+                        <label for=<?=$key?> class="col-sm-2 control-label"><?=htmlentities($field["nome"], ENT_QUOTES, 'ISO-8859-1')?></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name=<?=$key?> placeholder="Field Value">
                         </div>
