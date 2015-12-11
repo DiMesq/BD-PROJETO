@@ -33,26 +33,6 @@
     </div>
     </div>
 </div>
-<div id="deleteNoteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog small-modal-width">
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header font-black">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Are you sure?</h4>
-        </div>
-        <div class="modal-body">
-        	<form class="form-inline" id="deleteNote" action="page.php" method="POST">
-		        <div class="form-group">
-		          	<div class="col-sm-5 col-sm-offset-2">
-		            	<button type="submit" class="btn btn-danger">YES</button>
-		          	</div>
-		        </div>
-		    </form>
-        </div> 
-    </div>
-    </div>
-</div>
 <div id="addNoteModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
     <!-- Modal content-->
@@ -70,29 +50,6 @@
                 </div>
                 <div class="form-group">
                         <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-        </div> 
-    </div>
-    </div>
-</div>
-<div id="editFieldModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header font-black">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add Page</h4>
-        </div>
-        <div class="modal-body">
-            <form class="form-inline" id="editField"
-                    <div class="col-xs-8">
-                        <input type="text" class="form-control" id="pagename" name="pagename" placeholder="Page Name"/>
-                    </div>
-                    <div class="col-xs-2"></div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div> 
@@ -133,14 +90,12 @@
                                             <tr>
                                                 <td><?=htmlentities($field['cnome'], ENT_QUOTES, 'ISO-8859-1')?></td>
                                                 <td><?=htmlentities($field['valor'], ENT_QUOTES, 'ISO-8859-1')?></td>
-                                                <td><button data-toggle="modal" data-target="#editFieldModal" class="btn btn-primary btn-sm center-block" id=<?=$field['campocnt']?>>Edit</button></td>
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </td>
-                            <td><button data-toggle="modal" data-target="#deleteNoteModal" class="btn btn-danger btn-sm center-block" id=<?=$key?>>Delete</button></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
