@@ -1,0 +1,112 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #7986CB ;
+    color:floralwhite;
+}
+
+body .small-modal-width {
+    width: 175px;
+}
+
+.dark-table{
+    color:black;
+}
+
+.font-black {
+    color:#2C3539;
+}
+
+.link-font {
+    color:#e5e5e5;
+}
+.center-block{
+    display: block;
+    margin-left: auto; margin-right:auto;
+}
+.space-top {
+    position: relative;
+    margin-top: 15%;
+}
+
+.round-edge {
+    border-radius: 22px;
+}
+
+.vertical-center {
+    min-height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.row-header {
+    margin:0px auto;
+    padding:0px auto;
+}
+
+.row-content {
+    margin:0px auto;
+    padding: 50px 0px 50px 0px;
+    min-height:400px;
+}
+
+.row-border {
+    border-bottom: 1px ridge;
+}
+
+.row-footer{
+    background-color: #AfAfAf;
+    margin:0px auto;
+    padding: 20px 0px 20px 0px;
+}
+
+.jumbotron {
+    padding:70px 30px 70px 30px;
+    margin:0px auto;
+    background: #7986CB ;
+    color:floralwhite;
+    height: 100%;
+}
+
+
+body{
+    padding:50px 0px 0px 0px;
+    z-index:0;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #303F9F;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: #6666ff;
+}
+.navbar-inverse {
+     background: #303F9F;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #fff;
+    background: #1A237E;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+ .navbar-inverse .navbar-nav > .open > a:hover,
+ .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background: #1A237E;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu> li> a,
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+    background-color: #303F9F;
+    color:#eeeeee;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu> li> a:hover {
+    color:#000000;
+}
