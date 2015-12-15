@@ -72,6 +72,27 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 			apologize("Duplicate name for field. Please pick a different name for your field.");
 		}
 
+		// get the notes of this type
+		$notes = query("SELECT 	R.regcounter
+						FROM 	registo R
+						WHERE 	R.userid = ?
+								AND R.typecounter = ?",
+						$_SESSION['id'],
+						$_POST['typeid']);
+		print_r($notes);
+		// insert the new field in every note of this type with empty value
+		foreach ($notes as $key => $note) {
+
+			// get the idseq value
+			$iseq = next_idseq();
+
+			update("INSERT INTO valor (userid, typeid, campoid, regid, valor, idseq, ativo) 
+						VALUES (?, ?, $campoid, ?, '', $idseq, true)",
+					$_SESSION["id"],
+					$_POST["typeid"],
+					$note["regcounter"]);
+		}
+		print_r($i);
 	}
 
 	// delete field
