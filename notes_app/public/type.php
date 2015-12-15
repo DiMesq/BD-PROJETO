@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 								AND R.typecounter = ?",
 						$_SESSION['id'],
 						$_POST['typeid']);
-		print_r($notes);
+
 		// insert the new field in every note of this type with empty value
 		foreach ($notes as $key => $note) {
 
@@ -92,7 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET"){
 					$_POST["typeid"],
 					$note["regcounter"]);
 		}
-		print_r($i);
 	}
 
 	// delete field
