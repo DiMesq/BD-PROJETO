@@ -26,3 +26,4 @@ After that you should create your database and change the content of the *notes_
 To create the correct tables for your database schema run the *initital_tables/create_tables.sql* script.
 
 Finally, just visit the server that is runnning the app.
+
