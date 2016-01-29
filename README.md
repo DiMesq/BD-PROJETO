@@ -1,4 +1,4 @@
-##Final project for the Databases Management Systems class(Fall Semester of 2015/2016)
+##Final project for the Databases Management Systems class (Fall Semester 15/16)
 
 #About
 The project consists of implementing a Note Book app to explore some concepts Database related concepts.
@@ -13,7 +13,8 @@ These include:
 * retrieving knowledge from the app's Database using queries; 
 * integrity constraints, concretely applied using MySQL triggers; 
 * optimization of the most frequent queries using indexes; 
-* normal forms for the tables in the database; data wharehousing, concretely applied using a star schema.
+* normal forms for the tables in the database; 
+* data wharehousing, concretely applied using a star schema.
 
 #Using of the Note Book app
 First copy the *notes_app* folder.
