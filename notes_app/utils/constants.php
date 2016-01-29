@@ -6,12 +6,12 @@
     define("DATABASE", "projeto_bd");
 
     // database password
-    define("PASSWORD", "qLjv4hmZE");
+    define("PASSWORD", "your_db_passord");
 
     // database server
-    define("SERVER", "127.0.0.1");
+    define("SERVER", "your_db_server");
 
     // database username
-    define("USERNAME", "root");
+    define("USERNAME", "your_db_username");
 
 ?>
