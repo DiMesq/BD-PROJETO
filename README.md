@@ -1,4 +1,4 @@
-#Final project for the Database Management Systems (Fall Semester of 2015/2016)
+##Final project for the Databases Management Systems class(Fall Semester of 2015/2016)
 
 #About
 The project consists of implementing a Note Book app to explore some concepts Database related concepts.
@@ -17,7 +17,11 @@ These include:
 
 #Using of the Note Book app
 First copy the *notes_app* folder.
+
 Then place the root of your server in the *notes_app/public folder*.
+
 After that you should create your database and change the content of the *notes_app/utils/constants.php* file accordingly.
+
 To create the correct tables for your database schema run the *initital_tables/create_tables.sql* script.
+
 Finally, just visit the server that is runnning the app.
